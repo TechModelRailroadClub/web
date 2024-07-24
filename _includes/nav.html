@@ -14,18 +14,18 @@
 				{% for navitem in site.navbar.links %}
 				{% if navitem.sublinks %}
 				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="{{ navitem.link }}" role="button"
+					<a class="nav-link dropdown-toggle" href="{{ navitem.link | relative_url }}" role="button"
 						data-bs-toggle="dropdown" aria-expanded="false">
 						{{ navitem.name }}
 					</a>
 					<ul class="dropdown-menu">
 						{% for sublink in navitem.sublinks %}
-						<li><a class="dropdown-item" href="{{ sublink.link }}">{{ sublink.name }}</a></li>
+						<li><a class="dropdown-item" href="{{ sublink.link | relative_url }}">{{ sublink.name }}</a></li>
 						{% endfor %}
 					</ul>
 				</li>
 				{% else %}
-				<li class="nav-item"><a class="nav-link" href="{{ navitem.link }}">{{ navitem.name }}</a></li>
+				<li class="nav-item"><a class="nav-link" href="{{ navitem.link | relative_url }}">{{ navitem.name }}</a></li>
 				{% endif %}
 				{% endfor %}
 
