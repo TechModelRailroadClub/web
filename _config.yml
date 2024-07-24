@@ -9,7 +9,7 @@ description: >- # this means to ignore newlines until the next item
   where we've been since 1997. If you'd like to visit the club, we're usually happy to welcome visitors
   during our regular meetings, and hold an open house twice a year, when you can be sure that lots of
   trains will be running. MIT students are always welcome to visit and join the club.
-baseurl: "/tmrc-web"
+baseurl: "/tmrc-web" # comment out for non-github builds (handled automatically in docker build)
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 
 navbar:
@@ -41,5 +41,5 @@ footer:
       link: https://github.com/tech-model-railroad-club
 
 
-exclude: ["CNAME", "LICENSE", "README.md"]
+exclude: ["CNAME", "LICENSE", "README.md", "Dockerfile"]
 
