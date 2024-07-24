@@ -1,0 +1,48 @@
+---
+title: Home
+---
+
+{% include head.html %}
+
+<body class="bg-light">
+    {% include nav.html %}
+    <div class="bg-light container col-lg-8">
+        <div class="px-4 py-5 my-5 text-center">
+            <div class="rotate-wrapper">
+                <img src="{{ site.baseurl }}{{ site.navbar.logo }}"
+                    style="-webkit-filter: invert(100%); filter: invert(100%);" alt=""
+                    class="d-inline-block align-text-top text-center px-1 py-5 rotate">
+            </div>
+            <h1 class="pb-3 text-center">{{site.title}}</h1>
+            <div class="mx-auto">
+                <p class="lead text-center">{{site.description}}</p>
+            </div>
+            <br>
+            <hr>
+            <h2 class="pb-3 text-center">News</h2>
+
+            <div class="row justify-content-center">
+                {% for post in site.posts limit:3 %}
+                <div class="col-sm-4">
+                    <div class="card m-2 post-preview text-start">
+                        <div class="card-body">
+                            <a href="{{ post.url | relative_url }}"><h5 class="card-title">{{post.title}}</h5></a>
+                            <h6 class="card-subtitle mb-2 text-body-secondary">{{post.author}}</h6>
+                            <p class="card-text">{{post.excerpt}}</p>
+                            <!-- <div class="d-flex justify-content-center"><a href="{{ post.url | relative_url }}"
+                                    class="btn btn-primary">Read More</a></div> -->
+                        </div>
+                    </div>
+                </div>
+
+                {% endfor %}
+            </div>
+
+        </div>
+
+    </div>
+    </div>
+    {% include footer.html %}
+
+
+</body>

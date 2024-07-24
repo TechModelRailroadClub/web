@@ -1,0 +1,38 @@
+---
+title: Home
+---
+
+{% include head.html %}
+
+<body class="bg-light min-vh-100">
+    {% include nav.html %}
+    <div class="bg-light container">
+        <div class="px-4 py-5 my-5 text-center align-items-center">
+            <h2 class="pb-3 text-center">News</h2>
+
+
+            {% for post in site.posts%}
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card m-2 post-preview text-start">
+                        <div class="card-body">
+                            <a href="{{ post.url | relative_url }}"><h4 class="card-title">{{post.title}}</h4></a>
+                            <h6 class="card-subtitle mb-2 text-body-secondary">{{post.author}}</h6>
+                            <p class="card-text">{{post.excerpt}}</p>
+                            <!-- <div class="d-flex justify-content-center"><a href="{{ post.url | relative_url }}"
+                                    class="btn btn-primary">Read More</a></div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+
+        </div>
+
+    </div>
+    </div>
+    {% include footer.html %}
+
+
+</body>

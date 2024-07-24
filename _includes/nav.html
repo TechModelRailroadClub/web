@@ -1,0 +1,36 @@
+<nav id="navbar-global" class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary text-center">
+	<div class="container justify-content-between col-lg-8">
+		<a class="navbar-brand rotate-wrapper" href="{{ site.baseurl }}/">
+			<img src="{{ site.baseurl }}{{ site.navbar.logo }}" alt="" height="28"
+				class="d-inline-block rotate align-text-center">
+			&nbsp;{{site.title}}
+		</a>
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+			aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+			<ul class="navbar-nav">
+				{% for navitem in site.navbar.links %}
+				{% if navitem.sublinks %}
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="{{ navitem.link }}" role="button"
+						data-bs-toggle="dropdown" aria-expanded="false">
+						{{ navitem.name }}
+					</a>
+					<ul class="dropdown-menu">
+						{% for sublink in navitem.sublinks %}
+						<li><a class="dropdown-item" href="{{ sublink.link }}">{{ sublink.name }}</a></li>
+						{% endfor %}
+					</ul>
+				</li>
+				{% else %}
+				<li class="nav-item"><a class="nav-link" href="{{ navitem.link }}">{{ navitem.name }}</a></li>
+				{% endif %}
+				{% endfor %}
+
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>

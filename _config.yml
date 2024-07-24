@@ -1,0 +1,44 @@
+title: Tech Model Railroad Club
+short_title: TMRC
+email: tmrc-web@mit.edu
+description: >- # this means to ignore newlines until the next item
+  The Tech Model Railroad club is an MIT student activity founded during the 1946-1947 school year,
+  making TMRC one of the oldest clubs at MIT. This site contains information on the club,
+  both past and present. There is information about the early days of the club, when we were
+  located in building 20, and the current activities of the club in our current home, building N52,
+  where we've been since 1997. If you'd like to visit the club, we're usually happy to welcome visitors
+  during our regular meetings, and hold an open house twice a year, when you can be sure that lots of
+  trains will be running. MIT students are always welcome to visit and join the club.
+url: "" # the base hostname & protocol for your site, e.g. http://example.com
+
+navbar:
+  logo: /assets/img/tmrc.svg
+  links:
+    - name: Home
+      link: "/"
+    - name: About
+      link: "/about.html"
+    - name: News
+      link: "/news.html"
+    - name: System 3
+      sublinks:
+        - name: Overview
+          link: '/system3'
+    - name: System 4
+      sublinks:
+        - name: Overview
+          link: '/system4'
+        
+    - name: Contact
+      link: "mailto:tmrc-web@mit.edu"
+
+footer:
+  links:
+    - name: MIT Homepage
+      link: https://www.mit.edu/
+    - name: GitHub Repositories
+      link: https://github.com/tech-model-railroad-club
+
+
+exclude: ["CNAME", "LICENSE", "README.md"]
+
