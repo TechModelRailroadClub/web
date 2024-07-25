@@ -1,0 +1,24 @@
+/* Style sheet for TMRC web pages
+   Thomas O'Reilly, 28 July 2002 */
+/* body {margin-left:0.5in ; margin-right:0.5in} */
+em {font-style:italic}
+/*
+ H1 {margin-left:-0.5in}
+ H2 {margin-left:-0.25in}
+*/
+H1, H2, H3, H4, H5, H6
+{color: #AA0000; font-family: sans-serif}
+.album {text-align: center}
+.album TD {text-align: center; width: 200px}
+.album TD.pic {width: 200px; height: 200px}
+
+/* Make PRE tags wrap their contents */
+pre {
+ overflow-x: auto; /* Use horizontal scroller if needed; for Firefox 2, not needed in Firefox 3 */
+ white-space: pre-wrap; /* css-3 */
+ white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
+ white-space: -pre-wrap; /* Opera 4-6 */
+ white-space: -o-pre-wrap; /* Opera 7 */
+ /* width: 99%; */
+ word-wrap: break-word; /* Internet Explorer 5.5+ */
+}

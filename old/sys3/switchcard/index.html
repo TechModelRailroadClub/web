@@ -1,0 +1,398 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+
+<!-- Mirrored from tmrc.mit.edu/sys3/switchcard/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 25 Jul 2024 02:54:57 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=iso-8859-1" /><!-- /Added by HTTrack -->
+<HEAD>
+<TITLE>TMRC System 3 Switch Cards</TITLE>
+<link rev=made href="mailto:tmrc-web@mit.edu">
+<link rev=owns href="mailto:tmrc-web@mit.edu">
+<link REL="SHORTCUT ICON" HREF="../../favicon.ico" type="image/x-icon">
+<LINK REL="stylesheet" HREF="../../tmrc.css" type="text/css">
+
+</head>
+<BODY bgcolor="#ffffff" text="#000000">
+<table background="../../menubar/MenuBack.gif" cellspacing=0 cellpadding=0 width="100%">
+<tr>
+<td align="center">
+<IMG SRC="../../menubar/MenuBar.gif" WIDTH=600 HEIGHT=32
+ BORDER=0
+ ALT=" Home | Store | About | Progress | TNP | Videos | Visit | Links" USEMAP="#mainmap">
+
+<MAP NAME="mainmap">
+ <AREA SHAPE=RECT COORDS="15,0,70,31"
+      HREF="../../index.html" ALT="Main Menu">
+ <AREA SHAPE=RECT COORDS="80,0,140,31"
+     HREF="../../store/index.html" ALT="TMRC Store">
+ <AREA SHAPE=RECT COORDS="150,0,230,31"
+     HREF="../../about.html" ALT="About TMRC">
+ <AREA SHAPE=RECT COORDS="240,0,320,31"
+     HREF="../../progress/index.html" ALT="Progress">
+ <AREA SHAPE=RECT COORDS="330,0,390,31"
+     HREF="../../TNP/index.html" ALT="About the TNP">
+ <AREA SHAPE=RECT COORDS="400,0,460,31"
+     HREF="../../video/index.html" ALT="Videos">
+ <AREA SHAPE=RECT COORDS="470,0,520,31"
+     HREF="../../visit.html" ALT="Visit the Clubroom">
+ <AREA SHAPE=RECT COORDS="530,0,625,31"
+     HREF="../../links.html" ALT="Links">
+
+</MAP>
+
+</td>
+</tr>
+</table>
+
+
+<style type="text/css">
+P { margin-top:.3em; margin-bottom:.3em}
+P.prose { text-indent:4ex }
+/*P.list-title { margin-bottom:0px }*/
+ul,ol {margin-top:0px}
+table.figure {
+  border:solid thin;
+}
+table.figure th { padding-right:1em; text-align:left }
+table.figure td { vertical-align:top; padding-right:1em }
+table.figure .heading { border-bottom:solid thin}
+table.figure .subheading {margin-top:1em; font-weight:bold}
+ol.inline,ul.inline {list-style-position:inside; margin-left:0em}
+ol.inline,ul.inline ol {list-style-position:inside; margin-left:2em}
+ol.inline p {margin-left:2em}
+ol {list-style-type: decimal; margin-left:2em}
+ol ol {list-style-type: lower-alpha}
+ol ol ol {list-style-type: lower-roman}
+.center {text-align:center;}
+</style>
+</head>
+<body>
+<div class="Section1">
+<p align="center">
+<span style="font-size:200%">Tech Model Railroad Club Control System</span><br />
+<span style="font-size:150%">System 3 Design - Switch Card</span><br />
+<span style="font-size:130%">John E. McNamara</span><br />
+2/18/2004
+</p>
+<h2>Table of Contents</h2>
+
+<ol>
+<li><a href="#intro">Introduction</a></li>
+<li><a href="#transmit">Transmitting Data to the Switch
+Cards</a></li>
+<li><a href="#outputs">Outputs</a></li>
+<li><a href="#receive">Receiving Data from the Switch Cards</a></li>
+<li><a href="#cabling">Cabling</a></li>
+<li><a href="#additional">Additional Information</a></li>
+</ol>
+
+<h2><a name="intro">1. Introduction</a></h2>
+
+<p class="prose">When the Tech Model Railroad Club
+(TMRC) moved its layout from its former location in MIT's
+Building 20 to the new location in Building N52, the club brought
+along the relay-operated control system that had served the club
+for nearly 35 years. While reliable, this system (System 2) was
+physically large, not easily expandable, and lacked many desirable
+features that could easily be accomplished with an electronic
+system.</p>
+
+<p class="prose">As a first step in developing a new
+electronic system (System 3), the club (principally John Purbrick)
+designed a circuit that would allow a computer to operate switches
+(turnouts) on the layout. James Knight and Alvar Saenz-Otero did
+the printed circuit board layout. To control cost and risk, it was
+decided that these cards would not contain microprocessors, but
+rather would respond to streams of bytes transmitted from a central
+interface message processor (IMP).</p>
+
+<p class="prose">Card size was also chosen on the basis
+of cost and risk. Since many integrated circuits come with eight
+buffers or drivers in each package, and since track switches often
+occur in clusters, it was decided that the best card size was one
+that served eight switches. In addition, it was felt desirable to
+provide outputs on the card that could operate wayside signals via
+control information passed from a master computer through the IMP.
+For this purpose, the standard switch card includes eight
+general-purpose outputs in addition to the outputs used to operate
+track switches. Finally, it was envisioned that push buttons at the
+side of the layout might be used under some circumstances, so the
+standard switch card includes eight general-purpose inputs.</p>
+
+<p class="prose">While this document emphasizes the
+design of a standard switch card, the switch card bus and protocol
+described can be used for other types of card.</p>
+
+<h2><a name="transmit">2. Transmitting Data to the Switch
+Cards</a></h2>
+
+<p class="prose">All data transmitted to the switch
+cards originates in the IMP and is transmitted serially over a bus
+that connects all of the switch cards. One of the signals on the
+bus is a clock that latches each transmitted bit into the shift
+registers on all of the switch cards simultaneously. Thus, at any
+given moment, all of the shift registers contain the same
+information.</p>
+
+<p class="prose">The bus conveys four signals, the
+first three of which are described in this section. Received Data
+is described in <a href="#receive">4. Receiving Data from the Switch
+Cards.</a></p>
+
+<ul class="inline">
+<li>Clock</li>
+<li>Transmitted Data</li>
+<li>Strobe</li>
+<li>Received Data</li>
+</ul>
+
+<div>
+</tr>
+
+<div class="center"><img width="540" height="250" src="image1.gif"></div>
+
+<p class="prose">In the figure, the IMP is sending a
+three-byte message, ABC<a href="#_ftn1" name="_ftnref1" title=
+"">[1]</a>, onto the switch card bus. The bytes are being transmitted
+serially (a bit at a time) over the transmit data lead. The clock
+signal is clocking the data into the shift registers within each of
+the three switch cards shown. The TMRC standard switch cards have
+three 8-bit shift registers that are concatenated to form a 24-bit
+shift register. However, as shown in the figure, the size of the
+shift registers on each card need not be the same. If a shift
+register is longer than the bit stream, some portion is unused. If
+the shift register is shorter than the bit stream sent, the initial
+bits sent are lost. (At startup, the IMP is given configuration
+information that tells it how many bytes can be sent to each card.)
+For simplicity, the figures that follow describe only the case of
+three-byte messages and three-byte shift registers.</p>
+
+<div class="center"><img width="540" height="244" src="image2.gif"></div>
+ 
+
+<p class="prose">Each of the shift registers shown is a
+<i>double-buffered</i> shift register (74HC595) having an eight-bit
+shift register section and an eight-bit &#8220;output
+register&#8221; section into which the bits can be loaded (in
+parallel) when shifting has ceased. When the IMP has finished
+sending the last byte of a message, it issues a Strobe signal that
+performs the parallel load of the output registers. However, in
+each switch card, byte C is the only register connected to the
+Strobe line. Thus, the Strobe signal issued by the IMP only
+performs a parallel load for the last byte received. Once loaded,
+the eight bits of byte C, now on the output pins of the 74HC595
+chip, are compared to the card address that is specified by DIP
+switches on the card. A 74HC688 8-bit comparator chip performs this
+operation. If the last byte received matches the card address, the
+comparator performs a parallel loading operation for the other
+bytes received earlier in the message - in this case, bytes A and
+B. The parallel loading of bytes A and B updates the output signals
+for the card shown at left. For the card shown at right, there are
+no changes in the outputs, as that card's address did not
+match the last byte sent.</p>
+
+<h2><a name="outputs">3. Outputs</a></h2>
+
+<p class="prose">The standard TMRC switch card contains
+three shift registers. One of these is used for address
+recognition, as explained above. The other two provide a total of
+16 outputs, eight of which are connected to driver circuits that
+operate small relays on the board. These relays contain contacts
+that operate switch machines and contacts that change the polarity
+of switch frogs. (When a switch is thrown to the left, the frog
+power must come from the right hand rail, and when the switch is
+thrown to the right, the frog power must come from the left hand
+rail. The switch machines contain contacts that can do this, but
+they are not felt to be adequately reliable.)</p>
+
+<p class="prose">The switch card relays were donated to
+TMRC, and the card was designed around them. Some are double-pole,
+double-throw, and some are quadruple-pole, double-throw. Luckily,
+the two types are compatible in layout. For simple switch
+installations, a double-pole, double-throw relay is used, with the
+two contacts respectively serving the switch motor and the frog.
+When a crossover is installed (two switches connecting parallel
+tracks) a quadruple-pole, double-throw relay allows control of the
+two motors and the two frogs. (See <a href="#additional">6. Additional
+Information</a> for further details on switch motor wiring.)</p>
+
+<p class="prose">The remaining eight outputs are
+connected to a DIP socket that provides the following
+capabilities:</p>
+
+<ul>
+<li class="prose">If a driver chip (similar to the
+ULN2805 driver that controls the relays) is installed, extra relays
+located off the board can be driven.</li>
+
+<li class="prose">If a resistor pack is installed in
+the socket, trackside signal circuitry can be driven.</li>
+</ul>
+
+<p class="prose">A 9-pin connector carries signals away
+from the board if either of the above options is in use.</p>
+
+<p class="prose">The second item in the above list
+merits further explanation. The outputs of the shift register
+(CMOS, not TTL) are very close to +5 Volts for the 1 state and very
+close to ground for the 0 state. There is space on the board for
+analog circuitry on the board to create a <i>pseudo ground</i>
+signal of approximately +2.5 Volts. Use of three voltage levels
+becomes important when one considers the operation of a red/green
+bi-color LED. Such a device lights red if one lead is more positive
+than the other and lights green if that lead is less positive than
+the other. If a shift register output lead and the pseudo ground
+lead (2.5 Volts) are wired to a bi-color LED, the shift register
+output lead can be either more positive (+5) or more negative
+(zero) than the pseudo ground. Thus, eight leads and one pseudo
+ground lead can turn eight bi-color LEDs red or green individually,
+depending on the data received. Further, if the state of the logic
+output is changed sufficiently rapidly (80 times per second or a 40
+Hz cycle frequency), the LED appears to be yellow. The frequency of
+packet transmission was selected to match this 40Hz
+requirement.</p>
+
+<p class="prose">The data rate over the bus was chosen
+from among the standard selections available in the IMP processor
+(PIC16F877), with the requirement that all packets must be
+completed within a 1/80 second window. A frequency of 312.5KHz was
+selected.</p>
+
+<p class="prose">At start-up, the Server tells the IMP
+which addresses are in use and how they are configured. The IMP
+loads this information into a RAM chip. The same chip is used for
+configuration data (i.e. which addresses are in use, and the number
+of data bytes associated with each) and the actual states of all
+the controlled outputs. The IMP is programmed to drive all of the
+information within its RAM to all of the switch cards 80 times per
+second.</p>
+
+<p class="prose">While the preceding description has
+emphasized the standard TMRC switch card, the switch card bus
+protocol can be used to operate custom cards. In particular, TMRC
+has a signal bridge with ten signal heads that uses a custom,
+hand-wired interface that obeys the bus protocol. It does not have
+any relays, but rather has ten LED driver circuits.</p>
+
+<h2><a name="receive">4. Receiving Data from the Switch
+Cards</a></h2>
+
+<p class="prose">The IMP can receive eight bits of data
+from any of the TMRC standard switch cards. This function is best
+understood by quickly reviewing the transmission of the data to the
+switch cards.</p>
+
+<div class="center"><img width="540" height="241" src="image3.gif"></div>
+<div class="center"><img width="540" height="245" src="image4.gif"></div>
+
+<p class="prose">The figure above is a slightly
+modified version of the previous figure. The IMP has just
+transmitted a message (ABC) and has issued a Strobe signal to
+transfer the last byte (C) into the output registers on each card.
+Each card has compared that byte to its card address. In the
+leftmost card shown, the address has matched, and bytes A and B
+have also been transferred to their output registers, where they
+drive the outputs.</p>
+
+<p class="prose">However, in addition to enabling the
+parallel load of bytes A and B, the successful address comparison
+also enables a shift register. This shift register is a
+parallel-to-serial device that accepts eight data bits in parallel
+and shifts them out serially onto the Received Data bus in time
+with transitions of the clock line as soon as the clock signal
+resumes.</p>
+
+<p class="prose">As indicated in the lower portion of
+the figure, when the IMP sends the next message (bytes D, E, and
+F), the C bytes from the previous message remain in place
+controlling their respective address comparator circuits, as no
+Strobe signal has yet been issued. Thus, although bytes D, E, and F
+are shifted onto each card, the leftmost card is enabling input
+information onto the Received Data bus, and the clock signal is
+clocking it into the IMP. In the example shown, the eight bits of
+data being received by IMP are clocked onto the Received Data bus
+while the D byte is being transmitted from the IMP to the cards.
+Undefined data is clocked onto the Received Data bus while the E
+and F bytes are transmitted to the cards. The transfer of undefined
+data onto the Received Data bus occurs whenever the number of input
+registers (bytes) on a card is less than the number of output bytes
+transmitted to the next card being addressed.</p>
+
+<p class="prose">The number of input registers (bytes)
+on a card may be greater than the number of output bytes required
+by the next card being addressed. To ensure there are sufficient
+clock pulses to shift out the contents of the input registers, the
+IMP must send more bytes to the next card than that card requires.
+For example, if the leftmost card in the preceding diagram had been
+equipped with input registers for six bytes, the next message sent
+could have been XXXDEF, with the last byte sent (F) being the
+address byte for that transmission, and DE being the data bytes.
+The XXX string (sent first) would be lost, having been sent merely
+to provide enough clocking for the IMP to receive the input data
+from the six input registers on the leftmost card.</p>
+
+<p class="prose">It is also possible that the number of
+input registers on a card equals the number of output bytes
+required by the next card. In that case, no undefined input data is
+received and no extraneous data is transmitted to the next card
+addressed.</p>
+
+<h2><a name="cabling">5. Cabling</a></h2>
+
+<p class="prose">The switch card bus uses EIA-422
+interface technology, specifically AM26LS31 drivers and AM26LS32
+receivers. EIA-422 is a differential signaling system employing a
+pair of wires for each signal conveyed. One wire contains an
+inverted version of the other signal, and information is conveyed
+by the difference between the two wires.&#160; Thus, if both
+signals V<sub>+</sub> and V<sub>-</sub> have an interfering signal
+X added, the difference (V<sub>+</sub>+X) - (V<sub>-</sub>+X)
+equals (V<sub>+</sub> - V<sub>-</sub>), and the interfering signal
+has been canceled out. To ensure that each wire receives equal
+noise exposure, the two wires are twisted together.</p>
+
+<p class="prose">The IMP is the only device that can
+drive the Transmit Data, Strobe, and Clock leads. Only the card
+that recognizes its address when Strobe is asserted in an
+IMP-to-card transmission sequence can drive the Received Data lead
+during the data clocking interval that precedes the next Strobe
+signal. See <a href="#receive">4. Receiving Data from the Switch
+Cards</a>.</p>
+
+<p class="prose">The TMRC application uses four pair in
+an eight-twisted-pair ribbon cable that has an untwisted (flat)
+section every 18 inches. A standard mass-termination socket can be
+applied at any of the flat spots, and the socket can be plugged
+into a PC board-mounted header. No cable-cutting or soldering is
+required.</p>
+
+<h2><a name="additional">6. Additional Information</a></h2>
+
+<p class="prose">The switch motors are operated with
+one side always connected to ground, and the other side switched by
+one of the switch relay's contacts to either +12 or -12
+volts. The question is sometimes asked why the two power supplies
+are needed. It is certainly possible to control a motor
+bi-directionally with a single voltage, but doing so requires two
+&#8220;double-throw&#8221; contacts arranged as a &#8220;reversing
+bridge&#8221;. Since there are only two such contacts available for
+each track switch, and one contact is used to control track power
+to the switch frog, only one double-throw contact is available to
+control the motor. Thus, dual power supplies are required.</p>
+
+<img width="346" height="75" src="image5.gif">
+</div>
+
+<div>
+<div id="ftn1">
+<p><a href="#_ftnref1" name="_ftn1" title="">[1]</a> In the text,
+mention of bytes ABC means byte A is sent first. In the diagrams,
+the same set of bytes is shown as C-B-A with byte A sent first. The
+C-B-A order is intended to show the bytes flowing into the various
+shift registers in the diagrams.</p>
+</div>
+</div>
+</body>
+
+<!-- Mirrored from tmrc.mit.edu/sys3/switchcard/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 25 Jul 2024 02:55:13 GMT -->
+</html>
+

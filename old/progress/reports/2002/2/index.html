@@ -1,0 +1,398 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+
+<!-- Mirrored from tmrc.mit.edu/progress/reports/2002/2/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 25 Jul 2024 02:47:25 GMT -->
+<HEAD>
+<TITLE>TMRC - Progress Page: February 2002</TITLE>
+<link rev=made href="mailto:tmrc-web@mit.edu">
+<link rev=owns href="mailto:tmrc-web@mit.edu">
+<link REL="SHORTCUT ICON" HREF="../../../../favicon.ico" type="image/x-icon">
+<LINK REL="stylesheet" HREF="../../../../tmrc.css" type="text/css">
+<base >
+</head>
+<BODY bgcolor="#ffffff" text="#000000">
+<table background="../../../../menubar/MenuBack.gif" cellspacing=0 cellpadding=0 width="100%">
+<tr>
+<td align="center">
+<IMG SRC="../../../../menubar/MenuBar.gif" WIDTH=600 HEIGHT=32
+ BORDER=0
+ ALT=" Home | Store | About | Progress | TNP | Videos | Visit | Links" USEMAP="#mainmap">
+
+<MAP NAME="mainmap">
+ <AREA SHAPE=RECT COORDS="15,0,70,31"
+      HREF="../../../../index.html" ALT="Main Menu">
+ <AREA SHAPE=RECT COORDS="80,0,140,31"
+     HREF="../../../../store/index.html" ALT="TMRC Store">
+ <AREA SHAPE=RECT COORDS="150,0,230,31"
+     HREF="../../../../about.html" ALT="About TMRC">
+ <AREA SHAPE=RECT COORDS="240,0,320,31"
+     HREF="../../../index.html" ALT="Progress">
+ <AREA SHAPE=RECT COORDS="330,0,390,31"
+     HREF="../../../../TNP/index.html" ALT="About the TNP">
+ <AREA SHAPE=RECT COORDS="400,0,460,31"
+     HREF="../../../../video/index.html" ALT="Videos">
+ <AREA SHAPE=RECT COORDS="470,0,520,31"
+     HREF="../../../../visit.html" ALT="Visit the Clubroom">
+ <AREA SHAPE=RECT COORDS="530,0,625,31"
+     HREF="../../../../links.html" ALT="Links">
+
+</MAP>
+
+</td>
+</tr>
+</table>
+
+
+
+<center>
+<IMG SRC="../../../../images/cache/top_80920.11011.gif" HEIGHT=100 WIDTH=600 ALT="February '02">
+</center>
+
+This page describes work accomplished on the new TMRC layout during
+the month of February 2002, as taken from the descriptions posted to
+the club mailing list.
+
+
+
+<style>
+dt {padding:1ex 0ex; font-size: 120%; background-color: #DDDDDD; color:#AA0000;}
+.floatright {
+float: right;
+clear: right;
+margin: 0 0 0.5em 1.5em;
+}
+.floatleft {
+float: left;
+clear: left;
+margin: 0 1.5em 0.5em 0;
+}
+</style>
+<table width="100%"><td valign="top">
+<DL><DT><A NAME="2002022"><B>February 2</B></A></DT><DD><P><I>System 3 Progress Report</I><BR>
+So, today, after everyone else had left, I ran four trains around in a loop, all
+at the same time. How did I manage? Jeff was listing off some features he'd like
+to see, so I just went ahead and added one.
+<P>
+Sys3 now will stop the train automatically and flash the cab signals if it gets
+a red light, until either: the user presses the (i guess it can be called
+call-on) button, or the signal changes, at which point it resumes its previous
+speed. This makes it actually possible to run many many trains, and even insert
+more into the loop while the rest are still running, without having to worry
+about them running into each other. Very cool. :) Now we just need more cabs so
+you can run multiple trains without having to use the text console.
+<P>
+In other news, the next three block cards are on their way to being completed
+(which will make 8 block cards, 64 blocks), which means soon S-yard will be
+operational as well.
+<P>
+<I>James</I>
+<P><br clear="all"></DD><DT><A NAME="2002026"><B>February 6</B></A></DT><DD><P>John Shriver paved the carbarn ladder tracks and a small portion of the
+trolley loop that is near the turntable. Andy Miller painted some
+locomotives. Ken Terrell tested a three-car articulated set, one of three
+he bought at the Springfield show.
+<P>
+Roger Neumann continued soldering components onto the two block cards he
+has been building. James Knight and Tom O'Reilly debugged some track
+continuity problems that were affecting System3 performance. For part of
+the evening there were TWELVE trains running simultaneously, an all-time
+record for TMRC. John McNamara worked on a high-level description of
+System3, and here it is:
+<P>
+The principal component of System3 is the Server, a PC running the main
+control program, which is written in Java.  The Server is connected to an
+RS422 serial bus that connects to:
+<P>
+1) The IMP<BR>
+2) The Block Cards<BR>
+3) The Cab Controllers
+<P>
+The IMP is a PIC microprocessor that sends data to the Switch Cards via a
+special shift-register-like bus. Each switch card can operate up to 8
+switches (turnouts) on the layout. The IMP also controls the aforementioned
+RS422 serial bus via a token passing scheme.
+<P>
+The Block Cards each use a PIC processor to control the generation of power
+in 8 blocks. Unlike System2 where each control box ("cab") had its own
+power source ("throttle"), in System3 each block has its own pulse power
+throttle that receives control information from the cab controlling that
+block. Thus one cab can control several throttles. The association of cabs
+to the pulse power throttles in the blocks is provided by the Server.
+<P>
+The Cab Controllers use PIC processors to monitor the speed and direction
+settings in the hand-held devices used by layout operators. The updated
+speed and direction information is forwarded many times per second to the
+throttles in the blocks occupied by the train.
+<P>
+As a train moves into a new block, the program in the Server causes the cab
+controlling that train to become logically associated with an additional
+throttle/block on a block card. The speed and direction information
+provided by the cab, via the cab controller, is forwarded to the newly
+associated block. Blocks that are no longer occupied by the train have
+their throttles set to zero.
+<P>
+Switches are currently operated by seperate PC running a switch control and
+layout display program called RSIG. Since these PCs control the switches,
+and did so before the advent of the Server and the IMP, they are presently
+connected to the shift-register-like bus that interconnects the switch
+cards. Eventually, they will have an Ethernet connection to the Server so
+that they are coordinated with the database contained therein. Switches
+will be controllable via these computers, via keypads on the cabs, or via
+layout pushbuttons that are monitored by the switch cards, which can
+forward button-push information to the Server and IMP.
+<P>
+Status: Switch cards for the current layout have been constructed and
+installed. More will be needed as the layout grows. With the completion of
+a few more block cards, the same will be true for block cards. Cabs, cab
+controllers, and the software to operate therein are the next parts of the
+System3 project to be completed. Assistance in any of these construction
+and programming efforts is most welcome!
+<P><br clear="all"></DD><DT><A NAME="20020213"><B>February 13</B></A></DT><DD><P>John Shriver's trolley system paving work has been completed in the car
+barn area and is now extending across the Whatahack River to the loop area
+immediately adjacent to the roundhouse area. Tonight, John took the initial
+paving step, which is the construction of sidewalk supports that form the
+boundaries of the paved area. Andy Miller continued his painting work on
+some North Shore locomotives and joined with Ed Drozd to refill the Coke
+machine. Ed also did some work on the KATO SD40's that he purchased for the
+Club. John McNamara worked on his TNP superliners, installing new
+trucksets. John Purbrick installed a set of jacks for System3 cabs. James
+Knight and Alvar Saenz-Otero worked on Club finances. Brandon Gunn and
+Roger Neumann continued their construction of a couple of System3 block
+cards. Malcolm Laughlin tried some LED mounting alternatives for his
+proposed Berkmannville control panel and consulted with various people on
+panel construction alternatives. Tom O'Reilly demonstrated a nifty set of
+cab control windows on the Server. Each is labelled with a train
+identifier, such as "Amtrak Loco", has a speed control slider, and buttons
+for Reverse, Stop, Dropout, and Foo. The demonstration included multiple
+trains operating with the System3 "auto-stop on red" feature.
+<P><br clear="all"></DD><DT><A NAME="20020220"><B>February 20</B></A></DT><DD><P>The trolley line that serves downtown Gifford City runs between two loops.
+One loop is in the downtown area and was brought to the new layout from the
+old layout in Building 20. The other loop is near the roundhouse in a (not
+very classy) residential area. Street paving activity, in preparation for
+sidewalks and trolley poles, has been gradually moving from the downtown
+area toward the residential area. To secure the new paving to the plywood,
+in the same fashion as elsewhere, John Shriver installed round-top staples
+like those used for telephone wiring. Andy Miller found a multi-story
+residential and storefront building that was suitable for installation on
+the new street. It was slightly too deep, so he shortened it. Andy also
+repaired three freight cars and made some sketches of the proposed new
+freight yard.
+<P>
+More buildings are needed in this area, as are volunteers to build them.
+<P>
+Work on the new System3 control system is continuing on several fronts.
+James Knight did some work on it this evening, and Roger Neumann wired some
+network connectors for the block control cards. Malcolm Laughlin continued
+his work on a Berkmannville control panel. It features rectangular yellow
+LEDs in the track diagram that indicate switch positions. Yellow LEDs and
+red LEDs in the track diagram indicate which blocks are occupied and the
+direction in which each block is powered. It is going to look really
+spiffy. John Purbrick reconditioned several TNP cabooses such that they
+hold together, their ladders are intact, and their LED marker lights don't
+flicker. John McNamara did some work on his TNP superliners, under the
+supervision of Tom O'Reilly.
+<P>
+System3 received another test - a 37-car freight pulled by two Athern
+Genesis SD70M's brought in by Dave Mitton.
+<P><br clear="all"></DD><DT><A NAME="20020227"><B>February 27</B></A></DT><DD><P>John Shriver completed the paving around the trolley loop nearest the
+roundhouse. He's now got this down to a science; it looks great. John
+Purbrick installed an additional switch control card in the Berkmannville
+area. He and James Knight also did some work on the block card feedback
+feature. John McNamara loaded the Coke machine, which was once again
+gratifyingly close to empty despite being loaded on Saturday. He also
+brought in some plastic solvent for Genya Zaytman to use when he resumes
+work on his mill building. Malcolm Laughlin continued using 3DPlanIt to
+draw up proposed versions of the new freight yard. Mike Patton dropped by
+to visit.
+<P><br clear="all"></DD></DL><HR>
+<table cols="3" width="100%"><td align="center"><a href="../1/index.html">Previous Month</a></td><td></td><td align="center"><a href="../3/index.html">Next Month</a></td></table>
+
+</td>
+
+<td valign="top" width="180">
+
+<A NAME="Calendar"></A>
+<TABLE BORDER COLS=4 WIDTH="100%" >
+<CAPTION ALIGN=TOP>
+<BIG><BIG>Calendar</BIG></BIG>
+</CAPTION>
+<tr bgcolor="black"><td colspan=4 align="center"><font color="white"><big>2018</big></font></td></tr><TR bgcolor="#dddddd">
+<TD width="25%"><B>Jan</B></TD><TD width="25%"><B>Feb</B></TD><TD><B><A HREF="../../2018/3/index.html">Mar</A></B></TD><TD width="25%"><B>Apr</B></TD></TR>
+<TR bgcolor="#dddddd">
+<TD width="25%"><B>May</B></TD><TD width="25%"><B>Jun</B></TD><TD width="25%"><B>Jul</B></TD><TD width="25%"><B>Aug</B></TD></TR>
+<TR bgcolor="#dddddd">
+<TD width="25%"><B>Sep</B></TD><TD width="25%"><B>Oct</B></TD><TD width="25%"><B>Nov</B></TD><TD width="25%"><B>Dec</B></TD></TR>
+<tr bgcolor="black"><td colspan=4 align="center"><font color="white"><big>2017</big></font></td></tr><TR bgcolor="#dddddd">
+<TD width="25%"><B>Jan</B></TD><TD width="25%"><B>Feb</B></TD><TD width="25%"><B>Mar</B></TD><TD width="25%"><B>Apr</B></TD></TR>
+<TR bgcolor="#dddddd">
+<TD><B><A HREF="../../2017/5/index.html">May</A></B></TD><TD width="25%"><B>Jun</B></TD><TD width="25%"><B>Jul</B></TD><TD width="25%"><B>Aug</B></TD></TR>
+<TR bgcolor="#dddddd">
+<TD width="25%"><B>Sep</B></TD><TD><B><A HREF="../../2017/10/index.html">Oct</A></B></TD><TD><B><A HREF="../../2017/11/index.html">Nov</A></B></TD><TD width="25%"><B>Dec</B></TD></TR>
+<tr bgcolor="black"><td colspan=4 align="center"><font color="white"><big>2016</big></font></td></tr><TR bgcolor="#dddddd">
+<TD width="25%"><B>Jan</B></TD><TD><B><A HREF="../../2016/2/index.html">Feb</A></B></TD><TD width="25%"><B>Mar</B></TD><TD width="25%"><B>Apr</B></TD></TR>
+<TR bgcolor="#dddddd">
+<TD width="25%"><B>May</B></TD><TD width="25%"><B>Jun</B></TD><TD width="25%"><B>Jul</B></TD><TD><B><A HREF="../../2016/8/index.html">Aug</A></B></TD></TR>
+<TR bgcolor="#dddddd">
+<TD><B><A HREF="../../2016/9/index.html">Sep</A></B></TD><TD width="25%"><B>Oct</B></TD><TD><B><A HREF="../../2016/11/index.html">Nov</A></B></TD><TD width="25%"><B>Dec</B></TD></TR>
+<tr bgcolor="black"><td colspan=4 align="center"><font color="white"><big>2015</big></font></td></tr><TR bgcolor="#dddddd">
+<TD width="25%"><B>Jan</B></TD><TD width="25%"><B>Feb</B></TD><TD width="25%"><B>Mar</B></TD><TD width="25%"><B>Apr</B></TD></TR>
+<TR bgcolor="#dddddd">
+<TD width="25%"><B>May</B></TD><TD><B><A HREF="../../2015/6/index.html">Jun</A></B></TD><TD width="25%"><B>Jul</B></TD><TD><B><A HREF="../../2015/8/index.html">Aug</A></B></TD></TR>
+<TR bgcolor="#dddddd">
+<TD width="25%"><B>Sep</B></TD><TD width="25%"><B>Oct</B></TD><TD><B><A HREF="../../2015/11/index.html">Nov</A></B></TD><TD width="25%"><B>Dec</B></TD></TR>
+<tr bgcolor="black"><td colspan=4 align="center"><font color="white"><big>2014</big></font></td></tr><TR bgcolor="#dddddd">
+<TD><B><A HREF="../../2014/1/index.html">Jan</A></B></TD><TD><B><A HREF="../../2014/2/index.html">Feb</A></B></TD><TD><B><A HREF="../../2014/3/index.html">Mar</A></B></TD><TD><B><A HREF="../../2014/4/index.html">Apr</A></B></TD></TR>
+<TR bgcolor="#dddddd">
+<TD><B><A HREF="../../2014/5/index.html">May</A></B></TD><TD><B><A HREF="../../2014/6/index.html">Jun</A></B></TD><TD><B><A HREF="../../2014/7/index.html">Jul</A></B></TD><TD><B><A HREF="../../2014/8/index.html">Aug</A></B></TD></TR>
+<TR bgcolor="#dddddd">
+<TD><B><A HREF="../../2014/9/index.html">Sep</A></B></TD><TD><B><A HREF="../../2014/10/index.html">Oct</A></B></TD><TD><B><A HREF="../../2014/11/index.html">Nov</A></B></TD><TD><B><A HREF="../../2014/12/index.html">Dec</A></B></TD></TR>
+<tr bgcolor="black"><td colspan=4 align="center"><font color="white"><big>2013</big></font></td></tr><TR bgcolor="#dddddd">
+<TD><B><A HREF="../../2013/1/index.html">Jan</A></B></TD><TD><B><A HREF="../../2013/2/index.html">Feb</A></B></TD><TD><B><A HREF="../../2013/3/index.html">Mar</A></B></TD><TD><B><A HREF="../../2013/4/index.html">Apr</A></B></TD></TR>
+<TR bgcolor="#dddddd">
+<TD><B><A HREF="../../2013/5/index.html">May</A></B></TD><TD><B><A HREF="../../2013/6/index.html">Jun</A></B></TD><TD><B><A HREF="../../2013/7/index.html">Jul</A></B></TD><TD><B><A HREF="../../2013/8/index.html">Aug</A></B></TD></TR>
+<TR bgcolor="#dddddd">
+<TD><B><A HREF="../../2013/9/index.html">Sep</A></B></TD><TD><B><A HREF="../../2013/10/index.html">Oct</A></B></TD><TD><B><A HREF="../../2013/11/index.html">Nov</A></B></TD><TD><B><A HREF="../../2013/12/index.html">Dec</A></B></TD></TR>
+<tr bgcolor="black"><td colspan=4 align="center"><font color="white"><big>2012</big></font></td></tr><TR bgcolor="#dddddd">
+<TD><B><A HREF="../../2012/1/index.html">Jan</A></B></TD><TD><B><A HREF="../../2012/2/index.html">Feb</A></B></TD><TD><B><A HREF="../../2012/3/index.html">Mar</A></B></TD><TD><B><A HREF="../../2012/4/index.html">Apr</A></B></TD></TR>
+<TR bgcolor="#dddddd">
+<TD><B><A HREF="../../2012/5/index.html">May</A></B></TD><TD><B><A HREF="../../2012/6/index.html">Jun</A></B></TD><TD><B><A HREF="../../2012/7/index.html">Jul</A></B></TD><TD><B><A HREF="../../2012/8/index.html">Aug</A></B></TD></TR>
+<TR bgcolor="#dddddd">
+<TD><B><A HREF="../../2012/9/index.html">Sep</A></B></TD><TD><B><A HREF="../../2012/10/index.html">Oct</A></B></TD><TD><B><A HREF="../../2012/11/index.html">Nov</A></B></TD><TD><B><A HREF="../../2012/12/index.html">Dec</A></B></TD></TR>
+<tr bgcolor="black"><td colspan=4 align="center"><font color="white"><big>2011</big></font></td></tr><TR bgcolor="#dddddd">
+<TD><B><A HREF="../../2011/1/index.html">Jan</A></B></TD><TD><B><A HREF="../../2011/2/index.html">Feb</A></B></TD><TD><B><A HREF="../../2011/3/index.html">Mar</A></B></TD><TD><B><A HREF="../../2011/4/index.html">Apr</A></B></TD></TR>
+<TR bgcolor="#dddddd">
+<TD><B><A HREF="../../2011/5/index.html">May</A></B></TD><TD><B><A HREF="../../2011/6/index.html">Jun</A></B></TD><TD width="25%"><B>Jul</B></TD><TD width="25%"><B>Aug</B></TD></TR>
+<TR bgcolor="#dddddd">
+<TD><B><A HREF="../../2011/9/index.html">Sep</A></B></TD><TD><B><A HREF="../../2011/10/index.html">Oct</A></B></TD><TD><B><A HREF="../../2011/11/index.html">Nov</A></B></TD><TD><B><A HREF="../../2011/12/index.html">Dec</A></B></TD></TR>
+<tr bgcolor="black"><td colspan=4 align="center"><font color="white"><big>2010</big></font></td></tr><TR bgcolor="#dddddd">
+<TD><B><A HREF="../../2010/1/index.html">Jan</A></B></TD><TD><B><A HREF="../../2010/2/index.html">Feb</A></B></TD><TD><B><A HREF="../../2010/3/index.html">Mar</A></B></TD><TD><B><A HREF="../../2010/4/index.html">Apr</A></B></TD></TR>
+<TR bgcolor="#dddddd">
+<TD><B><A HREF="../../2010/5/index.html">May</A></B></TD><TD><B><A HREF="../../2010/6/index.html">Jun</A></B></TD><TD><B><A HREF="../../2010/7/index.html">Jul</A></B></TD><TD width="25%"><B>Aug</B></TD></TR>
+<TR bgcolor="#dddddd">
+<TD><B><A HREF="../../2010/9/index.html">Sep</A></B></TD><TD><B><A HREF="../../2010/10/index.html">Oct</A></B></TD><TD><B><A HREF="../../2010/11/index.html">Nov</A></B></TD><TD><B><A HREF="../../2010/12/index.html">Dec</A></B></TD></TR>
+<tr bgcolor="black"><td colspan=4 align="center"><font color="white"><big>2009</big></font></td></tr><TR bgcolor="#dddddd">
+<TD><B><A HREF="../../2009/1/index.html">Jan</A></B></TD><TD><B><A HREF="../../2009/2/index.html">Feb</A></B></TD><TD><B><A HREF="../../2009/3/index.html">Mar</A></B></TD><TD><B><A HREF="../../2009/4/index.html">Apr</A></B></TD></TR>
+<TR bgcolor="#dddddd">
+<TD width="25%"><B>May</B></TD><TD><B><A HREF="../../2009/6/index.html">Jun</A></B></TD><TD><B><A HREF="../../2009/7/index.html">Jul</A></B></TD><TD width="25%"><B>Aug</B></TD></TR>
+<TR bgcolor="#dddddd">
+<TD><B><A HREF="../../2009/9/index.html">Sep</A></B></TD><TD width="25%"><B>Oct</B></TD><TD><B><A HREF="../../2009/11/index.html">Nov</A></B></TD><TD><B><A HREF="../../2009/12/index.html">Dec</A></B></TD></TR>
+<tr bgcolor="black"><td colspan=4 align="center"><font color="white"><big>2008</big></font></td></tr><TR bgcolor="#dddddd">
+<TD><B><A HREF="../../2008/1/index.html">Jan</A></B></TD><TD><B><A HREF="../../2008/2/index.html">Feb</A></B></TD><TD><B><A HREF="../../2008/3/index.html">Mar</A></B></TD><TD><B><A HREF="../../2008/4/index.html">Apr</A></B></TD></TR>
+<TR bgcolor="#dddddd">
+<TD width="25%"><B>May</B></TD><TD><B><A HREF="../../2008/6/index.html">Jun</A></B></TD><TD width="25%"><B>Jul</B></TD><TD width="25%"><B>Aug</B></TD></TR>
+<TR bgcolor="#dddddd">
+<TD><B><A HREF="../../2008/9/index.html">Sep</A></B></TD><TD><B><A HREF="../../2008/10/index.html">Oct</A></B></TD><TD><B><A HREF="../../2008/11/index.html">Nov</A></B></TD><TD><B><A HREF="../../2008/12/index.html">Dec</A></B></TD></TR>
+<tr bgcolor="black"><td colspan=4 align="center"><font color="white"><big>2007</big></font></td></tr><TR bgcolor="#dddddd">
+<TD width="25%"><B>Jan</B></TD><TD><B><A HREF="../../2007/2/index.html">Feb</A></B></TD><TD><B><A HREF="../../2007/3/index.html">Mar</A></B></TD><TD><B><A HREF="../../2007/4/index.html">Apr</A></B></TD></TR>
+<TR bgcolor="#dddddd">
+<TD><B><A HREF="../../2007/5/index.html">May</A></B></TD><TD><B><A HREF="../../2007/6/index.html">Jun</A></B></TD><TD><B><A HREF="../../2007/7/index.html">Jul</A></B></TD><TD><B><A HREF="../../2007/8/index.html">Aug</A></B></TD></TR>
+<TR bgcolor="#dddddd">
+<TD><B><A HREF="../../2007/9/index.html">Sep</A></B></TD><TD><B><A HREF="../../2007/10/index.html">Oct</A></B></TD><TD><B><A HREF="../../2007/11/index.html">Nov</A></B></TD><TD><B><A HREF="../../2007/12/index.html">Dec</A></B></TD></TR>
+<tr bgcolor="black"><td colspan=4 align="center"><font color="white"><big>2006</big></font></td></tr><TR bgcolor="#dddddd">
+<TD><B><A HREF="../../2006/1/index.html">Jan</A></B></TD><TD><B><A HREF="../../2006/2/index.html">Feb</A></B></TD><TD><B><A HREF="../../2006/3/index.html">Mar</A></B></TD><TD><B><A HREF="../../2006/4/index.html">Apr</A></B></TD></TR>
+<TR bgcolor="#dddddd">
+<TD><B><A HREF="../../2006/5/index.html">May</A></B></TD><TD><B><A HREF="../../2006/6/index.html">Jun</A></B></TD><TD><B><A HREF="../../2006/7/index.html">Jul</A></B></TD><TD><B><A HREF="../../2006/8/index.html">Aug</A></B></TD></TR>
+<TR bgcolor="#dddddd">
+<TD><B><A HREF="../../2006/9/index.html">Sep</A></B></TD><TD><B><A HREF="../../2006/10/index.html">Oct</A></B></TD><TD><B><A HREF="../../2006/11/index.html">Nov</A></B></TD><TD><B><A HREF="../../2006/12/index.html">Dec</A></B></TD></TR>
+<tr bgcolor="black"><td colspan=4 align="center"><font color="white"><big>2005</big></font></td></tr><TR bgcolor="#dddddd">
+<TD><B><A HREF="../../2005/1/index.html">Jan</A></B></TD><TD><B><A HREF="../../2005/2/index.html">Feb</A></B></TD><TD><B><A HREF="../../2005/3/index.html">Mar</A></B></TD><TD><B><A HREF="../../2005/4/index.html">Apr</A></B></TD></TR>
+<TR bgcolor="#dddddd">
+<TD width="25%"><B>May</B></TD><TD><B><A HREF="../../2005/6/index.html">Jun</A></B></TD><TD><B><A HREF="../../2005/7/index.html">Jul</A></B></TD><TD><B><A HREF="../../2005/8/index.html">Aug</A></B></TD></TR>
+<TR bgcolor="#dddddd">
+<TD><B><A HREF="../../2005/9/index.html">Sep</A></B></TD><TD><B><A HREF="../../2005/10/index.html">Oct</A></B></TD><TD><B><A HREF="../../2005/11/index.html">Nov</A></B></TD><TD><B><A HREF="../../2005/12/index.html">Dec</A></B></TD></TR>
+<tr bgcolor="black"><td colspan=4 align="center"><font color="white"><big>2004</big></font></td></tr><TR bgcolor="#dddddd">
+<TD><B><A HREF="../../2004/1/index.html">Jan</A></B></TD><TD><B><A HREF="../../2004/2/index.html">Feb</A></B></TD><TD><B><A HREF="../../2004/3/index.html">Mar</A></B></TD><TD><B><A HREF="../../2004/4/index.html">Apr</A></B></TD></TR>
+<TR bgcolor="#dddddd">
+<TD><B><A HREF="../../2004/5/index.html">May</A></B></TD><TD><B><A HREF="../../2004/6/index.html">Jun</A></B></TD><TD><B><A HREF="../../2004/7/index.html">Jul</A></B></TD><TD><B><A HREF="../../2004/8/index.html">Aug</A></B></TD></TR>
+<TR bgcolor="#dddddd">
+<TD><B><A HREF="../../2004/9/index.html">Sep</A></B></TD><TD><B><A HREF="../../2004/10/index.html">Oct</A></B></TD><TD><B><A HREF="../../2004/11/index.html">Nov</A></B></TD><TD><B><A HREF="../../2004/12/index.html">Dec</A></B></TD></TR>
+<tr bgcolor="black"><td colspan=4 align="center"><font color="white"><big>2003</big></font></td></tr><TR bgcolor="#dddddd">
+<TD><B><A HREF="../../2003/1/index.html">Jan</A></B></TD><TD><B><A HREF="../../2003/2/index.html">Feb</A></B></TD><TD><B><A HREF="../../2003/3/index.html">Mar</A></B></TD><TD width="25%"><B>Apr</B></TD></TR>
+<TR bgcolor="#dddddd">
+<TD><B><A HREF="../../2003/5/index.html">May</A></B></TD><TD><B><A HREF="../../2003/6/index.html">Jun</A></B></TD><TD><B><A HREF="../../2003/7/index.html">Jul</A></B></TD><TD><B><A HREF="../../2003/8/index.html">Aug</A></B></TD></TR>
+<TR bgcolor="#dddddd">
+<TD><B><A HREF="../../2003/9/index.html">Sep</A></B></TD><TD><B><A HREF="../../2003/10/index.html">Oct</A></B></TD><TD><B><A HREF="../../2003/11/index.html">Nov</A></B></TD><TD width="25%"><B>Dec</B></TD></TR>
+<tr bgcolor="black"><td colspan=4 align="center"><font color="white"><big>2002</big></font></td></tr><TR bgcolor="#dddddd">
+<TD width="25%"><B>Jan</B></TD><TD width="25%"><B>Feb</B></TD><TD width="25%"><B>Mar</B></TD><TD width="25%"><B>Apr</B></TD></TR>
+<TR>
+<TD><font size="-1"><A HREF="../1/index.html#2002019">9</A> <A HREF="../1/index.html#20020110">10</A> <A HREF="../1/index.html#20020116">16</A> <A HREF="../1/index.html#20020122">22</A> </font></TD><TD><font size="-1"><A HREF="index.html#2002022">2</A> <A HREF="index.html#2002026">6</A> <A HREF="index.html#20020213">13</A> <A HREF="index.html#20020220">20</A> <A HREF="index.html#20020227">27</A> </font></TD><TD><font size="-1"><A HREF="../3/index.html#2002036">6</A> <A HREF="../3/index.html#20020327">27</A> </font></TD><TD><font size="-1"><A HREF="../4/index.html#20020410">10</A> <A HREF="../4/index.html#20020417">17</A> </font></TD></TR>
+<TR bgcolor="#dddddd">
+<TD width="25%"><B>May</B></TD><TD width="25%"><B>Jun</B></TD><TD width="25%"><B>Jul</B></TD><TD width="25%"><B>Aug</B></TD></TR>
+<TR>
+<TD><font size="-1"><A HREF="../5/index.html#20020526">26</A>&nbsp;<A HREF="../../../images1a5a.tcl?year=2002&amp;month=5&amp;day=26">p</A> </font></TD><TD><font size="-1"><A HREF="../6/index.html#20020612">12</A> <A HREF="../6/index.html#20020619">19</A> <A HREF="../6/index.html#20020622">22</A> <A HREF="../6/index.html#20020626">26</A> </font></TD><TD>.</TD><TD>.</TD></TR>
+<TR bgcolor="#dddddd">
+<TD width="25%"><B>Sep</B></TD><TD width="25%"><B>Oct</B></TD><TD width="25%"><B>Nov</B></TD><TD width="25%"><B>Dec</B></TD></TR>
+<TR>
+<TD>.</TD><TD>.</TD><TD>.</TD><TD>.</TD></TR>
+<tr bgcolor="black"><td colspan=4 align="center"><font color="white"><big>2001</big></font></td></tr><TR bgcolor="#dddddd">
+<TD><B><A HREF="../../2001/1/index.html">Jan</A></B></TD><TD><B><A HREF="../../2001/2/index.html">Feb</A></B></TD><TD><B><A HREF="../../2001/3/index.html">Mar</A></B></TD><TD><B><A HREF="../../2001/4/index.html">Apr</A></B></TD></TR>
+<TR bgcolor="#dddddd">
+<TD><B><A HREF="../../2001/5/index.html">May</A></B></TD><TD><B><A HREF="../../2001/6/index.html">Jun</A></B></TD><TD><B><A HREF="../../2001/7/index.html">Jul</A></B></TD><TD><B><A HREF="../../2001/8/index.html">Aug</A></B></TD></TR>
+<TR bgcolor="#dddddd">
+<TD><B><A HREF="../../2001/9/index.html">Sep</A></B></TD><TD><B><A HREF="../../2001/10/index.html">Oct</A></B></TD><TD><B><A HREF="../../2001/11/index.html">Nov</A></B></TD><TD><B><A HREF="../../2001/12/index.html">Dec</A></B></TD></TR>
+<tr bgcolor="black"><td colspan=4 align="center"><font color="white"><big>2000</big></font></td></tr><TR bgcolor="#dddddd">
+<TD><B><A HREF="../../2000/1/index.html">Jan</A></B></TD><TD><B><A HREF="../../2000/2/index.html">Feb</A></B></TD><TD><B><A HREF="../../2000/3/index.html">Mar</A></B></TD><TD><B><A HREF="../../2000/4/index.html">Apr</A></B></TD></TR>
+<TR bgcolor="#dddddd">
+<TD><B><A HREF="../../2000/5/index.html">May</A></B></TD><TD><B><A HREF="../../2000/6/index.html">Jun</A></B></TD><TD><B><A HREF="../../2000/7/index.html">Jul</A></B></TD><TD><B><A HREF="../../2000/8/index.html">Aug</A></B></TD></TR>
+<TR bgcolor="#dddddd">
+<TD><B><A HREF="../../2000/9/index.html">Sep</A></B></TD><TD><B><A HREF="../../2000/10/index.html">Oct</A></B></TD><TD><B><A HREF="../../2000/11/index.html">Nov</A></B></TD><TD><B><A HREF="../../2000/12/index.html">Dec</A></B></TD></TR>
+<tr bgcolor="black"><td colspan=4 align="center"><font color="white"><big>1999</big></font></td></tr><TR bgcolor="#dddddd">
+<TD><B><A HREF="../../1999/1/index.html">Jan</A></B></TD><TD><B><A HREF="../../1999/2/index.html">Feb</A></B></TD><TD><B><A HREF="../../1999/3/index.html">Mar</A></B></TD><TD><B><A HREF="../../1999/4/index.html">Apr</A></B></TD></TR>
+<TR bgcolor="#dddddd">
+<TD><B><A HREF="../../1999/5/index.html">May</A></B></TD><TD><B><A HREF="../../1999/6/index.html">Jun</A></B></TD><TD><B><A HREF="../../1999/7/index.html">Jul</A></B></TD><TD><B><A HREF="../../1999/8/index.html">Aug</A></B></TD></TR>
+<TR bgcolor="#dddddd">
+<TD><B><A HREF="../../1999/9/index.html">Sep</A></B></TD><TD><B><A HREF="../../1999/10/index.html">Oct</A></B></TD><TD><B><A HREF="../../1999/11/index.html">Nov</A></B></TD><TD><B><A HREF="../../1999/12/index.html">Dec</A></B></TD></TR>
+<tr bgcolor="black"><td colspan=4 align="center"><font color="white"><big>1998</big></font></td></tr><TR bgcolor="#dddddd">
+<TD><B><A HREF="../../1998/1/index.html">Jan</A></B></TD><TD><B><A HREF="../../1998/2/index.html">Feb</A></B></TD><TD><B><A HREF="../../1998/3/index.html">Mar</A></B></TD><TD><B><A HREF="../../1998/4/index.html">Apr</A></B></TD></TR>
+<TR bgcolor="#dddddd">
+<TD><B><A HREF="../../1998/5/index.html">May</A></B></TD><TD><B><A HREF="../../1998/6/index.html">Jun</A></B></TD><TD><B><A HREF="../../1998/7/index.html">Jul</A></B></TD><TD><B><A HREF="../../1998/8/index.html">Aug</A></B></TD></TR>
+<TR bgcolor="#dddddd">
+<TD><B><A HREF="../../1998/9/index.html">Sep</A></B></TD><TD><B><A HREF="../../1998/10/index.html">Oct</A></B></TD><TD><B><A HREF="../../1998/11/index.html">Nov</A></B></TD><TD><B><A HREF="../../1998/12/index.html">Dec</A></B></TD></TR>
+<tr bgcolor="black"><td colspan=4 align="center"><font color="white"><big>1997</big></font></td></tr><TR bgcolor="#dddddd">
+<TD width="25%"><B>Jan</B></TD><TD width="25%"><B>Feb</B></TD><TD width="25%"><B>Mar</B></TD><TD width="25%"><B>Apr</B></TD></TR>
+<TR bgcolor="#dddddd">
+<TD width="25%"><B>May</B></TD><TD width="25%"><B>Jun</B></TD><TD width="25%"><B>Jul</B></TD><TD><B><A HREF="../../1997/8/index.html">Aug</A></B></TD></TR>
+<TR bgcolor="#dddddd">
+<TD><B><A HREF="../../1997/9/index.html">Sep</A></B></TD><TD><B><A HREF="../../1997/10/index.html">Oct</A></B></TD><TD><B><A HREF="../../1997/11/index.html">Nov</A></B></TD><TD><B><A HREF="../../1997/12/index.html">Dec</A></B></TD></TR>
+</table></td></table>
+<HR>
+<TABLE BORDER=0 WIDTH="100%">
+	<TR>
+	<TD>
+		<ADDRESS>
+		<A HREF="../../../../index.html">Tech Model Railroad Club</A> of     
+		<A HREF="http://web.mit.edu/">
+		<img src="../../../../mit-redgrey-footer3.gif"
+		alt="MIT" width=42 height=24 align=absmiddle border=0></a> <BR>
+		MIT Room N52-118<BR>
+		265 Massachusetts Avenue<BR>
+		Cambridge, MA 02139<P>
+		</ADDRESS>
+	</TD>
+
+<!--foo!	<TD ALIGN=CENTER>
+		<A HREF="http://student.railfan.net/CMRA/" TARGET="parent">
+		<IMG SRC="/images/member.gif" WIDTH=88 HEIGHT=31 ALIGN="BOTTOM" BORDER=0></A><P>
+	</TD> -->
+
+	<TD align=RIGHT>
+		<ADDRESS>
+		+1 617 253-3269<br>
+		Email: <EM>tmrc-web@mit.edu</EM><br>
+		
+		</ADDRESS>
+	</TD>
+	</TR>
+<TR>
+<TD colspan=2>
+<FORM method="get" action="http://www.google.com/search">
+<INPUT type="text" name="q" size="31" maxlength="255" value="">
+<INPUT type="submit" value="Search TMRC">
+<INPUT type="hidden" name="sitesearch" value="tmrc.mit.edu">
+</FORM>
+</TD>
+</TR>
+</TABLE>
+</BODY>
+
+<!-- Mirrored from tmrc.mit.edu/progress/reports/2002/2/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 25 Jul 2024 02:47:28 GMT -->
+</HTML>

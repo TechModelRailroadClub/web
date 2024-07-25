@@ -1,0 +1,165 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+
+<!-- Mirrored from tmrc.mit.edu/sys3/picnet/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 25 Jul 2024 02:56:13 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=iso-8859-1" /><!-- /Added by HTTrack -->
+<HEAD>
+<TITLE>TMRC System 3 picnet</TITLE>
+<link rev=made href="mailto:tmrc-web@mit.edu">
+<link rev=owns href="mailto:tmrc-web@mit.edu">
+<link REL="SHORTCUT ICON" HREF="../../favicon.ico" type="image/x-icon">
+<LINK REL="stylesheet" HREF="../../tmrc.css" type="text/css">
+
+</head>
+<BODY bgcolor="#ffffff" text="#000000">
+<table background="../../menubar/MenuBack.gif" cellspacing=0 cellpadding=0 width="100%">
+<tr>
+<td align="center">
+<IMG SRC="../../menubar/MenuBar.gif" WIDTH=600 HEIGHT=32
+ BORDER=0
+ ALT=" Home | Store | About | Progress | TNP | Videos | Visit | Links" USEMAP="#mainmap">
+
+<MAP NAME="mainmap">
+ <AREA SHAPE=RECT COORDS="15,0,70,31"
+      HREF="../../index.html" ALT="Main Menu">
+ <AREA SHAPE=RECT COORDS="80,0,140,31"
+     HREF="../../store/index.html" ALT="TMRC Store">
+ <AREA SHAPE=RECT COORDS="150,0,230,31"
+     HREF="../../about.html" ALT="About TMRC">
+ <AREA SHAPE=RECT COORDS="240,0,320,31"
+     HREF="../../progress/index.html" ALT="Progress">
+ <AREA SHAPE=RECT COORDS="330,0,390,31"
+     HREF="../../TNP/index.html" ALT="About the TNP">
+ <AREA SHAPE=RECT COORDS="400,0,460,31"
+     HREF="../../video/index.html" ALT="Videos">
+ <AREA SHAPE=RECT COORDS="470,0,520,31"
+     HREF="../../visit.html" ALT="Visit the Clubroom">
+ <AREA SHAPE=RECT COORDS="530,0,625,31"
+     HREF="../../links.html" ALT="Links">
+
+</MAP>
+
+</td>
+</tr>
+</table>
+
+
+
+<CENTER>
+<IMG SRC="../../images/cache/top_167569.15433.gif" HEIGHT=100 WIDTH=600 ALT="System 3 picnet">
+</CENTER>
+</head>
+<body>
+  <h1>Introduction</h1>
+  <p>The "picnet" is the network that connects the IMP to the various smart cards on the layout, which typically have a "PIC" microcontroller on them. The name "picnet" used here is from the source code to the server software, where the files are under "~tmrc/sys3/server/tmrc/railserver/picnet".</p>
+  <p>Physically, the picnet is implemented with RJ45 connectors with cable with 4 twisted pairs. Each card has two RJ45 jacks, one for the incoming bus, and one for the outgoing bus to the next card. The last card is connected to a terminator. Needless to say, physical interruptions of the bus are a bad thing.</P>
+  <p>The most common nodes are the block cards. Also on the picnet are the turntable controller, the F-Yard touch-screen controller, and the "protocob" portable cabs.</p>
+  <p>Each node has an address between 0 and 255 (one hex byte). Address 0 is the IMP. The addresses are programmed into the PIC microcontroller in each device. The definitive list of the node addresses and types is in "~tmrc/sys3/server/real.lay", in the "Card:" lines.</P>
+  <P>No idea if there is a catalog of the cards with physical location information.</P>
+  <H1>Connector Pinout</H1>
+  <P>Needs to be added. Presumably the same pairing as in Ethernet cables.</P>
+  <H1>Packets</H1>
+  <P>Communications over the picnet are in the form of very small packets. The format is:</P>
+  <PRE>
+      +---------------------------+
+      | Start byte = 0xFF         |
+      +---------------------------+
+      | Packet type               |
+      +---------------------------+
+      | cardid                    |
+      +---------------------------+
+      | number of bytes to follow |
+      +---------------------------+
+      | 0-n data bytes            |
+      +---------------------------+
+      | checksum                  |
+      +---------------------------+
+  </PRE>
+  <P>This is a "character stuff" protocol, if a byte is 0xFF, it is repeated to avoid confusion with the start byte.</P>
+  <P>In packets sent by the server through the IMP, the cardid is the ID of the destination card, in packets sent by the cards through the IMP to the server, the cardid is the ID of the sending card.<P>
+  <P>There are two packet types every card is expected to respond to:</P>
+  <DL>
+    <DT>GOT_RESET: type 240, no data bytes</DT>
+    <DD>Request the card to reset, this is typically done by the PIC processor going into an infinite loop and being rebooted by a watchdog timeout.<DD>
+    <DT>GOT_STATUSREQ: type 243, no data bytes</DT>
+    <DD>Request for the card to send back a STATUSINFO packet</DD>
+  </DL>
+  <P>The first 7 data bytes of the STATUSINFO response packet are standard across all cards:</P>
+  <PRE>
+      +---------------------------+
+      | card type                 |
+      +---------------------------+
+      | uptime[0] (in 60 Hz ticks)|
+      +---------------------------+
+      | uptime[1]                 |
+      +---------------------------+
+      | uptime[2]                 |
+      +---------------------------+
+      | uptime[3]                 |
+      +---------------------------+
+      | reset type                |
+      +---------------------------+
+      | overflows                 |
+      +---------------------------+
+  </PRE>
+  <P>These are the card types that the Java server software knows:</P>
+  <TABLE>
+    <TR>
+      <TH>Type Number</TH>
+      <TH>Card Type</TH>
+    </TR>
+    <TR>
+      <TD>1</TD>
+      <TD>imp</TD>
+    </TR>
+    <TR>
+      <TD>2</TD>
+      <TD>block</TD>
+    </TR>
+    <TR>
+      <TD>3</TD>
+      <TD>protocab</TD>
+    </TR>
+    <TR>
+      <TD>4</TD>
+      <TD>turn table</TD>
+    </TR>
+    <TR>
+      <TD>5</TD>
+      <TD>bkcontrol</TD>
+    </TR>
+    <TR>
+      <TD>6</TD>
+      <TD>wireless cab</TD>
+    </TR>
+    <TR>
+      <TD>7</TD>
+      <TD>lcdcab</TD>
+    </TR>
+    <TR>
+      <TD>8</TD>
+      <TD>fycontrol</TD>
+    </TR>
+    <TR>
+      <TD>9</TD>
+      <TD>lcdcab2</TD>
+    </TR>
+  </TABLE>
+  <P>The reset types are power (1), brownout (2), watchdog (3), unknown (4). The overflows counter is the number of communications overflow errors that occurred.</P>
+  <P>There are also other packet types shared between cards:
+  <DL>
+    <DT>GOT_NOP: type 0</DT>
+    <DD>Does nothing.</DD>
+    <DT>GOT_GETMEM/GOT_MEMDUMP: type 241</DT>
+    <DD>Purpose unknown, maybe programming</DD>
+    <DT>GOT_SETMEM: type 242</DT>
+    <DD>Purpose unknown, maybe programming</DD>
+    <DT>GOT_DATETIME: type 245</DT>
+    <DD>Purpose unknown</DD>
+    <DT>GOT_PROGRAMRES: type 246</DT>
+    <DD>Purpose unknown</DD>
+  </DL>
+</body>
+
+<!-- Mirrored from tmrc.mit.edu/sys3/picnet/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 25 Jul 2024 02:56:16 GMT -->
+</html>

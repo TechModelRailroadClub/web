@@ -1,0 +1,170 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+
+<!-- Mirrored from tmrc.mit.edu/progress/reports/2003/3/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 25 Jul 2024 02:46:04 GMT -->
+<HEAD>
+<TITLE>TMRC - Progress Page: March 2003</TITLE>
+<link rev=made href="mailto:tmrc-web@mit.edu">
+<link rev=owns href="mailto:tmrc-web@mit.edu">
+<link REL="SHORTCUT ICON" HREF="../../../../favicon.ico" type="image/x-icon">
+<LINK REL="stylesheet" HREF="../../../../tmrc.css" type="text/css">
+<base >
+</head>
+<BODY bgcolor="#ffffff" text="#000000">
+<table background="../../../../menubar/MenuBack.gif" cellspacing=0 cellpadding=0 width="100%">
+<tr>
+<td align="center">
+<IMG SRC="../../../../menubar/MenuBar.gif" WIDTH=600 HEIGHT=32
+ BORDER=0
+ ALT=" Home | Store | About | Progress | TNP | Videos | Visit | Links" USEMAP="#mainmap">
+
+<MAP NAME="mainmap">
+ <AREA SHAPE=RECT COORDS="15,0,70,31"
+      HREF="../../../../index.html" ALT="Main Menu">
+ <AREA SHAPE=RECT COORDS="80,0,140,31"
+     HREF="../../../../store/index.html" ALT="TMRC Store">
+ <AREA SHAPE=RECT COORDS="150,0,230,31"
+     HREF="../../../../about.html" ALT="About TMRC">
+ <AREA SHAPE=RECT COORDS="240,0,320,31"
+     HREF="../../../index.html" ALT="Progress">
+ <AREA SHAPE=RECT COORDS="330,0,390,31"
+     HREF="../../../../TNP/index.html" ALT="About the TNP">
+ <AREA SHAPE=RECT COORDS="400,0,460,31"
+     HREF="../../../../video/index.html" ALT="Videos">
+ <AREA SHAPE=RECT COORDS="470,0,520,31"
+     HREF="../../../../visit.html" ALT="Visit the Clubroom">
+ <AREA SHAPE=RECT COORDS="530,0,625,31"
+     HREF="../../../../links.html" ALT="Links">
+
+</MAP>
+
+</td>
+</tr>
+</table>
+
+
+
+<center>
+<IMG SRC="../../../../images/cache/top_36992.7271.gif" HEIGHT=100 WIDTH=600 ALT="March '03">
+</center>
+
+This page describes work accomplished on the new TMRC layout during
+the month of March 2003, as taken from the descriptions posted to
+the club mailing list.
+
+
+
+<style>
+dt {padding:1ex 0ex; font-size: 120%; background-color: #DDDDDD; color:#AA0000;}
+.floatright {
+float: right;
+clear: right;
+margin: 0 0 0.5em 1.5em;
+}
+.floatleft {
+float: left;
+clear: left;
+margin: 0 1.5em 0.5em 0;
+}
+</style>
+<table width="100%"><td valign="top">
+<DL><DT><A NAME="20030331"><B>March 31</B></A></DT><DD><P><B>Old cabs, new features</b>
+<P>
+Well I finally got around to adding the rest of the necessary features 
+to control Trains. The changes are generic for all trains no matter 
+what kind of cab, but since we only have the old plug-in ones right 
+now, so I describe the features w.r.t. those.
+<P>
+- Autostop-on-red works significantly differently. The new idea is that 
+if there's actually someone there watching the train controls, don't 
+get in their way at all. However, if the throttle is just sitting there 
+unattended, stop the train before it crashes.
+<P>
+So, it's no longer required to press a specific button to restart your 
+train after a red signal. Simply twiddling the speed knob will make you 
+move again. In addition, there's a delay of 0 to 3 seconds after you 
+get a red before it stops your train to allow you time to twiddle 
+before the autostop. If it's moving faster than around 50%, it stops 
+immediately (Bad operator! You shouldn't be going that fast with a 
+yellow signal anyways!). Below that, the slower your train is moving, 
+the longer the delay is. I'm not sure how this feature will work out, 
+people should try it out and see if it works.
+<P>
+- You can now steal the block ahead of you if it is occupied and 
+unassigned using the '9' key.
+<P>
+- You can now drop the trailing block of the train using the '7' key.
+<P>
+- The cabs now emit irritating noises when your signal worsens to 
+yellow or red or when you press a button whose action is not possible.
+<P>
+The button I previously called "call on" is more properly a "reset" 
+button - its only duty now is to un-FOO your cab.
+<P>
+So, the full list of button actions is:
+<li>1-6: throw first through sixth switches ahead of you.
+<li>0: throw first trailing point switch which is against you towards you
+<li>7: drop one tail block
+<li>9: steal one block ahead
+<li>*: reverse
+<li>#: reset
+(or maybe reverse is # and reset is *, i can never remember)
+<P>
+<i>James Knight</i>
+
+
+<P><br clear="all"></DD></DL><HR>
+<table cols="3" width="100%"><td align="center"><a href="../2/index.html">Previous Month</a></td><td></td><td align="center">Next Month</td></table>
+
+</td>
+
+<td valign="top" width="180">
+
+<A NAME="Calendar"></A>
+<TABLE BORDER COLS=4 WIDTH="100%" >
+<CAPTION ALIGN=TOP>
+<BIG><BIG>Calendar</BIG></BIG>
+</CAPTION>
+</table></td></table>
+<HR>
+<TABLE BORDER=0 WIDTH="100%">
+	<TR>
+	<TD>
+		<ADDRESS>
+		<A HREF="../../../../index.html">Tech Model Railroad Club</A> of     
+		<A HREF="http://web.mit.edu/">
+		<img src="../../../../mit-redgrey-footer3.gif"
+		alt="MIT" width=42 height=24 align=absmiddle border=0></a> <BR>
+		MIT Room N52-118<BR>
+		265 Massachusetts Avenue<BR>
+		Cambridge, MA 02139<P>
+		</ADDRESS>
+	</TD>
+
+<!--foo!	<TD ALIGN=CENTER>
+		<A HREF="http://student.railfan.net/CMRA/" TARGET="parent">
+		<IMG SRC="/images/member.gif" WIDTH=88 HEIGHT=31 ALIGN="BOTTOM" BORDER=0></A><P>
+	</TD> -->
+
+	<TD align=RIGHT>
+		<ADDRESS>
+		+1 617 253-3269<br>
+		Email: <EM>tmrc-web@mit.edu</EM><br>
+		
+		</ADDRESS>
+	</TD>
+	</TR>
+<TR>
+<TD colspan=2>
+<FORM method="get" action="http://www.google.com/search">
+<INPUT type="text" name="q" size="31" maxlength="255" value="">
+<INPUT type="submit" value="Search TMRC">
+<INPUT type="hidden" name="sitesearch" value="tmrc.mit.edu">
+</FORM>
+</TD>
+</TR>
+</TABLE>
+</BODY>
+
+<!-- Mirrored from tmrc.mit.edu/progress/reports/2003/3/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 25 Jul 2024 02:46:17 GMT -->
+</HTML>

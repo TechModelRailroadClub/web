@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+
+<!-- Mirrored from tmrc.mit.edu/sys3/scab/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 25 Jul 2024 02:56:19 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=iso-8859-1" /><!-- /Added by HTTrack -->
+<HEAD>
+<TITLE>System 3 Display Software - Main Page</TITLE>
+<link rev=made href="mailto:tmrc-web@mit.edu">
+<link rev=owns href="mailto:tmrc-web@mit.edu">
+<link REL="SHORTCUT ICON" HREF="../../favicon.ico" type="image/x-icon">
+<LINK REL="stylesheet" HREF="../../tmrc.css" type="text/css">
+
+</head>
+<BODY bgcolor="#ffffff" text="#000000">
+<table background="../../menubar/MenuBack.gif" cellspacing=0 cellpadding=0 width="100%">
+<tr>
+<td align="center">
+<IMG SRC="../../menubar/MenuBar.gif" WIDTH=600 HEIGHT=32
+ BORDER=0
+ ALT=" Home | Store | About | Progress | TNP | Videos | Visit | Links" USEMAP="#mainmap">
+
+<MAP NAME="mainmap">
+ <AREA SHAPE=RECT COORDS="15,0,70,31"
+      HREF="../../index.html" ALT="Main Menu">
+ <AREA SHAPE=RECT COORDS="80,0,140,31"
+     HREF="../../store/index.html" ALT="TMRC Store">
+ <AREA SHAPE=RECT COORDS="150,0,230,31"
+     HREF="../../about.html" ALT="About TMRC">
+ <AREA SHAPE=RECT COORDS="240,0,320,31"
+     HREF="../../progress/index.html" ALT="Progress">
+ <AREA SHAPE=RECT COORDS="330,0,390,31"
+     HREF="../../TNP/index.html" ALT="About the TNP">
+ <AREA SHAPE=RECT COORDS="400,0,460,31"
+     HREF="../../video/index.html" ALT="Videos">
+ <AREA SHAPE=RECT COORDS="470,0,520,31"
+     HREF="../../visit.html" ALT="Visit the Clubroom">
+ <AREA SHAPE=RECT COORDS="530,0,625,31"
+     HREF="../../links.html" ALT="Links">
+
+</MAP>
+
+</td>
+</tr>
+</table>
+
+
+
+<CENTER>
+<IMG SRC="../../images/cache/top_192117.16346.gif" HEIGHT=100 WIDTH=600 ALT="System 3 Display">
+</CENTER>
+
+<H1>System 3 Display Software</H1>
+
+<p>Read all about the new System 3 display software...</p>
+
+<UL>
+<LI>Background</li>
+<LI><A HREF="scabdev.html">Development</A></LI>
+<LI><A HREF="scabops.html">Operating</A></LI>
+<LI><A Href="scabtech.html">Technical details</A></LI>
+<LI><A Href="scabfut.html">Future work</A></LI>
+</UL>
+
+<H2>Background</H2>
+
+<p>For the past couple of years TMRC has been working to replace System 2, which was a large assembly of telephone relays, miles and miles of wire and lots of dust.  System 2, built between 1963 and 1966, was a very advanced control system in its day, able to automatically switch power from the control cabs to the appropriate block of track and determine signals as trains would move around the layout.  Unfortunately, System 2 had a number of shortcomings that limited the club's ability to grow and build the layout we wanted in our new room.
+
+<p>One of the main problems with System 2 was its lack of expandability.  Power was switched to blocks using five, 5x10 crossbar switches.  This limited us to five control cabs (and therefore no more than five trains operating at any given time) and to 50 blocks of track.  The type of switches needed to expand the control system are no longer available, and even if they were, it would be a difficult and time consuming process.  As a partial workaround for these limitations, System 2 was only used to control mainline track, with operations in freight and passenger yards being controlled by separate control panels.  System 2 was also quite large, taking up space in the club room that could be better used by more layout.
+
+<p><em>See pictures of System 2 <a href="../../progress/reports/2002/5/index.html#20020526">here</A>
+
+<p>Since moving to our new room after the demolition of Building 20, the club has been building a new layout and a new control system to drive it.  The goals of the new control system were to provide a more advanced, more expandable control system.  Given the clubs history, the decision was made to design and build our own control system, rather than implementing a more advanced commercial system (such as DCC).
+
+<p>Our new system, System 3, allows for more than 50 blocks, so that separate yard controllers are not needed, and more than 5 cabs so that more trains can be run together.  System 3 hardware consists mainly of block cards and switch cards, which are controlled by messages sent by a server program running on a PC.  The first part of the system widely implemented were the switch cards, which were used to throw switches even while System 2 was being used to control blocks.  The block cards were implemented more recently.  Following successful testing of the cards, System 2 was disconnected from the track in January 2002, and the block cards installed.  The block cards have proven to be successful and System 2 was removed from the club room in July 2002; it can now be seen at the New England Museum of Telephony in Ellsworth, Maine.
+
+<p>A large, wall mounted display board was used show the status of switches and blocks under System 2.  Although these display boards are nice to use, they are time-consuming to build, and cannot be easily changed when the layout is modified.  Although we still have the old display board mounted in the club room, it was built for the clubs old layout.  Right now, we use it for the large digital clock in the middle of it, but we have no plans to update it to work with the new layout or control system.  
+
+<p>Instead, to go along with the new computerized control system, we are developing a new computer-based display system.  This is not the first computer based system the club has developed.  A program called RSIG was developed to interface with the switch cards and System 2.  RSIG displayed the status of the layout, showing switch positions, block occupancy, trains and occasionally the signals they were seeing.  RSIG was a DOS-based program that used VGA graphics (shown in the screenshot below) and talked to the system through a serial connection.  Although it would have been possible to rewrite RSIG to interface with the new server program, it was instead decided to write an entirely new and improved display program.
+
+<p><EM>A screenshot from RSIG, TMRC's old display software.  The tracks are laid out roughly as the real tracks are in the room.</EM>
+
+<center><img src="rsig.png" height=480 width=640 alt="RSIG Screenshot" vspace=5></center>
+
+<HR>
+<TABLE BORDER=0 WIDTH="100%">
+	<TR>
+	<TD>
+		<ADDRESS>
+		<A HREF="../../index.html">Tech Model Railroad Club</A> of     
+		<A HREF="http://web.mit.edu/">
+		<img src="../../mit-redgrey-footer3.gif"
+		alt="MIT" width=42 height=24 align=absmiddle border=0></a> <BR>
+		MIT Room N52-118<BR>
+		265 Massachusetts Avenue<BR>
+		Cambridge, MA 02139<P>
+		</ADDRESS>
+	</TD>
+
+<!--foo!	<TD ALIGN=CENTER>
+		<A HREF="http://student.railfan.net/CMRA/" TARGET="parent">
+		<IMG SRC="/images/member.gif" WIDTH=88 HEIGHT=31 ALIGN="BOTTOM" BORDER=0></A><P>
+	</TD> -->
+
+	<TD align=RIGHT>
+		<ADDRESS>
+		+1 617 253-3269<br>
+		Email: <EM>tmrc-web@mit.edu</EM><br>
+		
+		</ADDRESS>
+	</TD>
+	</TR>
+<TR>
+<TD colspan=2>
+<FORM method="get" action="http://www.google.com/search">
+<INPUT type="text" name="q" size="31" maxlength="255" value="">
+<INPUT type="submit" value="Search TMRC">
+<INPUT type="hidden" name="sitesearch" value="tmrc.mit.edu">
+</FORM>
+</TD>
+</TR>
+</TABLE>
+</BODY>
+
+<!-- Mirrored from tmrc.mit.edu/sys3/scab/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 25 Jul 2024 02:56:42 GMT -->
+</HTML>
+

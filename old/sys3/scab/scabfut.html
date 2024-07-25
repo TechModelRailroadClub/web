@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+
+<!-- Mirrored from tmrc.mit.edu/sys3/scab/scabfut.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 25 Jul 2024 03:21:23 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=iso-8859-1" /><!-- /Added by HTTrack -->
+<HEAD>
+<TITLE>System 3 Display Software - Future Plans</TITLE>
+<link rev=made href="mailto:tmrc-web@mit.edu">
+<link rev=owns href="mailto:tmrc-web@mit.edu">
+<link REL="SHORTCUT ICON" HREF="../../favicon.ico" type="image/x-icon">
+<LINK REL="stylesheet" HREF="../../tmrc.css" type="text/css">
+
+</head>
+<BODY bgcolor="#ffffff" text="#000000">
+<table background="../../menubar/MenuBack.gif" cellspacing=0 cellpadding=0 width="100%">
+<tr>
+<td align="center">
+<IMG SRC="../../menubar/MenuBar.gif" WIDTH=600 HEIGHT=32
+ BORDER=0
+ ALT=" Home | Store | About | Progress | TNP | Videos | Visit | Links" USEMAP="#mainmap">
+
+<MAP NAME="mainmap">
+ <AREA SHAPE=RECT COORDS="15,0,70,31"
+      HREF="../../index.html" ALT="Main Menu">
+ <AREA SHAPE=RECT COORDS="80,0,140,31"
+     HREF="../../store/index.html" ALT="TMRC Store">
+ <AREA SHAPE=RECT COORDS="150,0,230,31"
+     HREF="../../about.html" ALT="About TMRC">
+ <AREA SHAPE=RECT COORDS="240,0,320,31"
+     HREF="../../progress/index.html" ALT="Progress">
+ <AREA SHAPE=RECT COORDS="330,0,390,31"
+     HREF="../../TNP/index.html" ALT="About the TNP">
+ <AREA SHAPE=RECT COORDS="400,0,460,31"
+     HREF="../../video/index.html" ALT="Videos">
+ <AREA SHAPE=RECT COORDS="470,0,520,31"
+     HREF="../../visit.html" ALT="Visit the Clubroom">
+ <AREA SHAPE=RECT COORDS="530,0,625,31"
+     HREF="../../links.html" ALT="Links">
+
+</MAP>
+
+</td>
+</tr>
+</table>
+
+
+<CENTER>
+<IMG SRC="../../images/cache/top_192117.16346.gif" HEIGHT=100 WIDTH=600 ALT="System 3 Display">
+</CENTER>
+
+<H1>System 3 Display Software</H1>
+
+<p>Wow, someone read all the way to the end.  Or at least skipped to the end.  Either way, good for you...</p>
+
+<UL>
+<LI><A HREF="scabmain.html">Background</A></li>
+<LI><A HREF="scabdev.html">Development</A></LI>
+<LI><A HREF="scabops.html">Operating</A></LI>
+<LI><A HREF="scabtech.html">Technical details</A></LI>
+<LI>Future work</LI>
+</UL>
+
+<H2>Plans for future enhancifications</H2>
+
+<H3>Overview and shameless pitch for new members</H3>
+
+<p>We have lots of ideas for things to add to the display program, far more than the small size of our programming team will allow us to actually implement anytime soon.  If you're interested in joining the club and helping out on the projects listed below, or any of the other projects TMRC is working on, or even projects of your own, please visit our <A HREF="../../membership.html">membership page</A> to learn how to join.
+
+<H3>Graphical improvements</H3>
+Main Page
+<p>Blocks and switches are not drawn using various Tk canvas objects rather than just pixels in a bitmap.  This has some advantages, like making it easier to go back and reconfigure or move objects without having to redraw everything else.  Unfortunately, the routines that figure out just where all the lines and boxes and text are supposed to go don't do everything they need to do, and don't do some of the things they do as well as they should.  It mostly works okay now, but may be difficult to work with once the layout expands.
+
+<p>At some point, all this code needs to be ripped out and rewritten.  Hopefully, it can be replaced with a more robust and flexible set of drawing routines.
+
+<H3>Multi-headed displays</H3>
+
+<p>During open houses and operating sessions trains are usually controlled by operators in the tower.  The computer in the tower has a 19&quot monitor.  We would like to replace this with three or so LCD panels hanging from the ceiling, all being driven by the same computer and all being used to display system and train information.  The display software will be modified to make good use of the multiple display panels.  We would also like to add custom control panels, or perhaps a touch-screen display for the dispachers use.
+
+<H3>Scheduling of trains</H3>
+
+<p>In the future, the display program could be rewritten to allow the dispatcher to control scheduling of passenger and freight operations during operating sessions.  
+
+<H3>Automatic train operations</H3>
+
+<p>The display program has enough information about the status of the system that it should be able to run trains all by itself, at least in some basic sense.  Functions could be added so the display program could move trains from one location to another with no user intervention.
+
+<H3>Control of new system features</H3>
+
+<p>The system now controls blocks and switches through the cards.  The switch cards have a number of digital outputs that can be used to control trackside signals, but in the future will also control lighting inside buildings, animated scenery, or any number of other things.  Once the system controls these things, the display program will need to be modified to tell the server what to do with them.
+
+<HR>
+<TABLE BORDER=0 WIDTH="100%">
+	<TR>
+	<TD>
+		<ADDRESS>
+		<A HREF="../../index.html">Tech Model Railroad Club</A> of     
+		<A HREF="http://web.mit.edu/">
+		<img src="../../mit-redgrey-footer3.gif"
+		alt="MIT" width=42 height=24 align=absmiddle border=0></a> <BR>
+		MIT Room N52-118<BR>
+		265 Massachusetts Avenue<BR>
+		Cambridge, MA 02139<P>
+		</ADDRESS>
+	</TD>
+
+<!--foo!	<TD ALIGN=CENTER>
+		<A HREF="http://student.railfan.net/CMRA/" TARGET="parent">
+		<IMG SRC="/images/member.gif" WIDTH=88 HEIGHT=31 ALIGN="BOTTOM" BORDER=0></A><P>
+	</TD> -->
+
+	<TD align=RIGHT>
+		<ADDRESS>
+		+1 617 253-3269<br>
+		Email: <EM>tmrc-web@mit.edu</EM><br>
+		
+		</ADDRESS>
+	</TD>
+	</TR>
+<TR>
+<TD colspan=2>
+<FORM method="get" action="http://www.google.com/search">
+<INPUT type="text" name="q" size="31" maxlength="255" value="">
+<INPUT type="submit" value="Search TMRC">
+<INPUT type="hidden" name="sitesearch" value="tmrc.mit.edu">
+</FORM>
+</TD>
+</TR>
+</TABLE>
+</BODY>
+
+<!-- Mirrored from tmrc.mit.edu/sys3/scab/scabfut.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 25 Jul 2024 03:21:23 GMT -->
+</HTML>

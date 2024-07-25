@@ -30,8 +30,8 @@ navbar:
         - name: Overview
           link: '/system4'
         
-    - name: Contact
-      link: "mailto:tmrc-web@mit.edu"
+    - name: Old Site
+      link: "/old"
 
 footer:
   links:

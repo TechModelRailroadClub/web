@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+
+<!-- Mirrored from tmrc.mit.edu/sys3/turntable/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 25 Jul 2024 02:56:16 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=iso-8859-1" /><!-- /Added by HTTrack -->
+<HEAD>
+<TITLE>TMRC System 3 turntable</TITLE>
+<link rev=made href="mailto:tmrc-web@mit.edu">
+<link rev=owns href="mailto:tmrc-web@mit.edu">
+<link REL="SHORTCUT ICON" HREF="../../favicon.ico" type="image/x-icon">
+<LINK REL="stylesheet" HREF="../../tmrc.css" type="text/css">
+
+</head>
+<BODY bgcolor="#ffffff" text="#000000">
+<table background="../../menubar/MenuBack.gif" cellspacing=0 cellpadding=0 width="100%">
+<tr>
+<td align="center">
+<IMG SRC="../../menubar/MenuBar.gif" WIDTH=600 HEIGHT=32
+ BORDER=0
+ ALT=" Home | Store | About | Progress | TNP | Videos | Visit | Links" USEMAP="#mainmap">
+
+<MAP NAME="mainmap">
+ <AREA SHAPE=RECT COORDS="15,0,70,31"
+      HREF="../../index.html" ALT="Main Menu">
+ <AREA SHAPE=RECT COORDS="80,0,140,31"
+     HREF="../../store/index.html" ALT="TMRC Store">
+ <AREA SHAPE=RECT COORDS="150,0,230,31"
+     HREF="../../about.html" ALT="About TMRC">
+ <AREA SHAPE=RECT COORDS="240,0,320,31"
+     HREF="../../progress/index.html" ALT="Progress">
+ <AREA SHAPE=RECT COORDS="330,0,390,31"
+     HREF="../../TNP/index.html" ALT="About the TNP">
+ <AREA SHAPE=RECT COORDS="400,0,460,31"
+     HREF="../../video/index.html" ALT="Videos">
+ <AREA SHAPE=RECT COORDS="470,0,520,31"
+     HREF="../../visit.html" ALT="Visit the Clubroom">
+ <AREA SHAPE=RECT COORDS="530,0,625,31"
+     HREF="../../links.html" ALT="Links">
+
+</MAP>
+
+</td>
+</tr>
+</table>
+
+
+
+<CENTER>
+<IMG SRC="../../images/cache/top_177633.15521.gif" HEIGHT=100 WIDTH=600 ALT="Sys 3 turntable">
+</CENTER>
+</head>
+<body>
+  <h1>Introduction</h1>
+  <P>The turntable controller is a device on the picnet that controlls the turntable in F-Yard. It can be controlled by commands from the server, or by the keypad in front of the turntable.</P>
+  <P>The turntable bridge is connected to a 1/2 inch steel shaft that does down under the layout through two substantial bearings. Under the layout there is an aluminum disk mounted to the shaft about a foot in diameter, and there is a precision potentiometer connected to the end of the shaft. A small motor with a rubber wheel is spring-loaded into a pulley on the shaft.</P>
+  <P>Nothing locks the position of the bridge. This is done so nothing will be damaged (particulary the details on the bridge) if someone tries to move it by hand.</P>
+  <P>The potentitiometer's wiper is connected to an analog-to-digital convertor input on the PIC microcontroller, and is used for coarse positioning of the turntable. There is not enough resolution in this to accurately position the track.</P>
+  <P>Mounted hanging down over the edge of the aluminum disk is a "flag" for each track alignment. These flags go through an optical sensor with LED and photo-diode. The photo-diode is connected to another analog-to-digical convertor, and the system moves the bridge to the half-extinction point of the photo-diode. This provides the necessary precision in track aligment. The "servo" is always active keeping the track aligned, if you nudge the bridge, it will go back to the desired position.</P>
+  <P>The turntable contoroller is also responsible for track power connection to the bridge. It is disconnected while the bridge is moving, and connected in the correct polarity depending on which end of the bridge is connected to which type of track.</P>
+  <h2>Local Control</h2>
+  <P>The first two buttons are the track number, and then the last one is A or B, to select the desired end of the turntable bridge. The end of the bridge with the operator's booth is B, the other end is A.</P>
+  <P>The C, D, and # keys also do something.</P>
+  <h2>Remote Control</h2>
+  <P>There are three picnet request packet types specific to the turntable.</P>
+  <P>The first is GOT_NORMAL (1), in which the one data byte indicates what end of the turntable goes to which track number. The end bit is apparently 1 for the end with the operator's booth, and 0 for the other end. Packet format:</P>
+  <PRE>
+      +---------------------------------------+
+      | Start byte = 0xFF                     |
+      +---------------------------------------+
+      | GOT_NORMAL = 0x01                     |
+      +---------------------------------------+
+      | cardid = 99                           |
+      +---------------------------------------+
+      | number of bytes = 1                   |
+      +----+----+----+----+----+----+----+----+
+      | unused  | track number           |end |
+      |         |                        |    |
+      +----+----+----+----+----+----+----+----+
+      | checksum                              |
+      +---------------------------------------+
+  </PRE>
+  <P>The second is GOT_TO_CLOSEST (2), in which the desired track number is coded as above, but with the low bit 0. The controller will rotate the turntable in the direction that requires the least rotation. The packet format is:</P>
+  <PRE>
+      +---------------------------------------+
+      | Start byte = 0xFF                     |
+      +---------------------------------------+
+      | GOT_TO_CLOSEST = 0x02                 |
+      +---------------------------------------+
+      | cardid = 99                           |
+      +---------------------------------------+
+      | number of bytes = 1                   |
+      +----+----+----+----+----+----+----+----+
+      | unused  | track number           |un- |
+      |         |                        |used|
+      +----+----+----+----+----+----+----+----+
+      | checksum                              |
+      +---------------------------------------+
+  </PRE>
+  <P>The third is GOT_FOO (3), which has no data bytes. It will stop the turntable immediately. The packet format is:</P>
+  <PRE>
+      +---------------------------------------+
+      | Start byte = 0xFF                     |
+      +---------------------------------------+
+      | GOT_FOO = 0x03                        |
+      +---------------------------------------+
+      | cardid = 99                           |
+      +---------------------------------------+
+      | number of bytes = 0                   |
+      +---------------------------------------+
+      | checksum                              |
+      +---------------------------------------+
+  </PRE>
+  <P>A GOT_STATUS_INFO (243) request packet yields these data bytes in the response packet:</P>
+  <PRE>
+      +---------------------------------------+
+      | card type                             |
+      +----+----+----+----+----+----+----+----+
+      |foo |mov-|track number            |end |
+      |    |ing |                        |    |
+      +----+----+----+----+----+----+----+----+
+  </PRE>
+  <P>The "end" bit indicates which end of the bridge is aligned, with 1 being the operator's booth end, and 0 being the other end. The track number bits indicate what track that end of the bridge is aligned with. The moving bit is 0 if the bridge is moving, and 1 if it has stopped moving. The foo bit is 1 if the move was abandoned due to a GOT_FOO request.</P>
+</body>
+
+<!-- Mirrored from tmrc.mit.edu/sys3/turntable/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 25 Jul 2024 02:56:19 GMT -->
+</html>
+

@@ -1,0 +1,163 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+
+<!-- Mirrored from tmrc.mit.edu/sys3/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 25 Jul 2024 00:09:23 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=iso-8859-1" /><!-- /Added by HTTrack -->
+<HEAD>
+<TITLE>TMRC - System 3</TITLE>
+<link rev=made href="mailto:tmrc-web@mit.edu">
+<link rev=owns href="mailto:tmrc-web@mit.edu">
+<link REL="SHORTCUT ICON" HREF="../favicon.ico" type="image/x-icon">
+<LINK REL="stylesheet" HREF="../tmrc.css" type="text/css">
+
+</head>
+<BODY bgcolor="#ffffff" text="#000000">
+<table background="../menubar/MenuBack.gif" cellspacing=0 cellpadding=0 width="100%">
+<tr>
+<td align="center">
+<IMG SRC="../menubar/MenuBar.gif" WIDTH=600 HEIGHT=32
+ BORDER=0
+ ALT=" Home | Store | About | Progress | TNP | Videos | Visit | Links" USEMAP="#mainmap">
+
+<MAP NAME="mainmap">
+ <AREA SHAPE=RECT COORDS="15,0,70,31"
+      HREF="../index.html" ALT="Main Menu">
+ <AREA SHAPE=RECT COORDS="80,0,140,31"
+     HREF="../store/index.html" ALT="TMRC Store">
+ <AREA SHAPE=RECT COORDS="150,0,230,31"
+     HREF="../about.html" ALT="About TMRC">
+ <AREA SHAPE=RECT COORDS="240,0,320,31"
+     HREF="../progress/index.html" ALT="Progress">
+ <AREA SHAPE=RECT COORDS="330,0,390,31"
+     HREF="../TNP/index.html" ALT="About the TNP">
+ <AREA SHAPE=RECT COORDS="400,0,460,31"
+     HREF="../video/index.html" ALT="Videos">
+ <AREA SHAPE=RECT COORDS="470,0,520,31"
+     HREF="../visit.html" ALT="Visit the Clubroom">
+ <AREA SHAPE=RECT COORDS="530,0,625,31"
+     HREF="../links.html" ALT="Links">
+
+</MAP>
+
+</td>
+</tr>
+</table>
+
+
+
+<CENTER>
+<IMG SRC="../images/cache/top_37349.8008.gif" HEIGHT=100 WIDTH=600 ALT="System 3">
+</CENTER>
+
+The locomotives at TMRC are powered by DC motors that pick up electrical power from the rails.  The speed and direction of each locomotive is determined by the voltage and polarity of the voltage across the rails.  In order to operate multiple trains at once, the track is divided into a number of electrically isolated sections called blocks.  The task of supplying the power to each block is the job of the control system.  TMRC has built three automatic control systems since the clubs founding.
+<H3>The System</H3>
+The first control system at TMRC was completed in 1954.  Called the Automatic Cab Selection System (ACS or simply the "System" for short), it was one of the first automatic control systems built anywhere.  It was able to  control up to 5 trains and 30 blocks of track.  Like System 2 which followed it, it was built with a variety of electromechanical relays, including a lot of surplus telephone equipment.
+
+<H3>System 2</H3>
+<p>
+System 2, built between 1963 and 1966, operated the TMRC layout until January 2002.  It was so reliable that it functioned with no
+major faults for almost 40 years!  System 2 was large, the main piece being a wall of relays 6'
+high, 12' long, weighing over 600 pounds, and could not be readily extended to handle more blocks of track or larger numbers of trains (it was limited to 5 trains and 50 blocks of track), which was going to be a problem with the new layout in N52. Some pictures of System 2 can be found in the progress reports, especially <A HREF="../progress/reports/2002/5/index.html">here</A>. As an added bonus, there is an audio file there as well.
+
+<H3>System 3</H3>
+<P>
+The current control system, cleverly named System 3, is fully computer controlled through a network of circuit boards designed by club members.  Rather than a single large control system, components of System 3 are distributed under the layout.  Microcontroller based boards called block cards control up to eight blocks of track, while a second set of cards, called switch cards control up to eight turnouts apiece.  These cards all communicate with a server program running on a computer.  A separate program presents a graphical display of the state of the layout.  
+<P>Major features carried over from System 2 include:
+<UL>
+<LI>Block occupancy detection - we know when any a train is parked in
+    any section of track.  System 3 adds the ability to distinguish between locomotives and other occupying cars, like cabooses.
+<LI>Signals - each train engineer (operator) receives a green/yellow/red light
+    depending on whether they can move into the next section of track or not, just
+    like in real life.  System 3 adds the ability to set more specific signals (real railroads may have nine or more specific signals, each with a different meaning).
+<LI>Multiple independent cabs - System 2 could control up to 5 trains at a time; with System 3 the number is limited to the number of blocks of track (we've run as many as 17 locomotives at once).
+</UL>
+<P>New features with System 3:
+<UL>
+<LI>Velocity feedback and closed loop control - the System3 power supplies read
+    the actual speed of the locomotive, and provide closed loop control to
+    maintain constant speed of the locomotives
+<LI>Software Layout definition - in System3 the layout plan, which allows the
+    control system to know whether a train can advance into the next section of
+    track or not, is programmed completely in software!  If we change the
+    layout, we modify the software, and move on.  (In System 2 we had to
+    re-solder a huge array of wires.)
+<LI>Central control - since the system uses software, and computers are very
+    powerful today, we can have a single CPU control the whole layout, with
+    distributed power supplies under the bench-work.  This CPU controls both the
+    mainline and the yards; with System 2, since the number of relays was
+    physically limited, we had to build special controllers for the yards.
+<LI>Software is the limit!  Since the hardware part of System3 are fully
+    controlled by software, and they do not include any hardware that could
+    specifically limit operations, the true limit of what System3 can do, is in
+    software!  For example, if one day someone decides to make an Artificial
+    Intelligence (AI) program to run the trains, the layout could actually run
+    automatically!  But, for more fun, someday we'll be able to make the layout
+    web-controlled, so that we allow people from around the world to run trains
+    together with us.
+<LI>DCC compatibility.  The block cards have a header allowing an external DCC bus to be connected to individual blocks.  Occupancy detection is still enabled in DCC mode, allowing the system to run a mix of DC and DCC trains at the same time.  (The installed block cards will support this, but the software needed to make this happen has not been written.)
+</UL>
+
+
+Some portions of System 3 are documented more fully  in the pages listed below.
+<ul>
+<li><A href="imp/index.html">Imp</a>
+<li><A href="switchcard/index.html">Switch Cards</a>
+<li><A href="blockcard/index.html">Block Cards</a>
+<li><A href="picnet/index.html">picnet connecting Block Cards and more</a>
+<li><A href="turntable/index.html">Turntable controller on picnet</a>
+<li><A href="scab/index.html">Software cabs and dispatcher</a>
+<li><A href="server/index.html">Server</a>
+</ul>
+
+<P>Debugging information can be found <A HREF="Sys3DebugGuide/index.html">here</a>
+
+<P>The following pieces currently do not have public on-line documentation:
+<ul>
+<li>Wired and (future) wireless cabs
+</ul>
+
+<HR>
+<TABLE BORDER=0 WIDTH="100%">
+	<TR>
+	<TD>
+		<ADDRESS>
+		<A HREF="../index.html">Tech Model Railroad Club</A> of     
+		<A HREF="http://web.mit.edu/">
+		<img src="../mit-redgrey-footer3.gif"
+		alt="MIT" width=42 height=24 align=absmiddle border=0></a> <BR>
+		MIT Room N52-118<BR>
+		265 Massachusetts Avenue<BR>
+		Cambridge, MA 02139<P>
+		</ADDRESS>
+	</TD>
+
+<!--foo!	<TD ALIGN=CENTER>
+		<A HREF="http://student.railfan.net/CMRA/" TARGET="parent">
+		<IMG SRC="/images/member.gif" WIDTH=88 HEIGHT=31 ALIGN="BOTTOM" BORDER=0></A><P>
+	</TD> -->
+
+	<TD align=RIGHT>
+		<ADDRESS>
+		+1 617 253-3269<br>
+		Email: <EM>tmrc-web@mit.edu</EM><br>
+		
+		</ADDRESS>
+	</TD>
+	</TR>
+<TR>
+<TD colspan=2>
+<FORM method="get" action="http://www.google.com/search">
+<INPUT type="text" name="q" size="31" maxlength="255" value="">
+<INPUT type="submit" value="Search TMRC">
+<INPUT type="hidden" name="sitesearch" value="tmrc.mit.edu">
+</FORM>
+</TD>
+</TR>
+</TABLE>
+</BODY>
+
+<!-- Mirrored from tmrc.mit.edu/sys3/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 25 Jul 2024 00:09:35 GMT -->
+</HTML>
+
+

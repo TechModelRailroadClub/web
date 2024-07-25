@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+
+<!-- Mirrored from tmrc.mit.edu/sys3/scab/scabdev.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 25 Jul 2024 03:21:07 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=iso-8859-1" /><!-- /Added by HTTrack -->
+<HEAD>
+<TITLE>System 3 Display Software - Development</TITLE>
+<link rev=made href="mailto:tmrc-web@mit.edu">
+<link rev=owns href="mailto:tmrc-web@mit.edu">
+<link REL="SHORTCUT ICON" HREF="../../favicon.ico" type="image/x-icon">
+<LINK REL="stylesheet" HREF="../../tmrc.css" type="text/css">
+
+</head>
+<BODY bgcolor="#ffffff" text="#000000">
+<table background="../../menubar/MenuBack.gif" cellspacing=0 cellpadding=0 width="100%">
+<tr>
+<td align="center">
+<IMG SRC="../../menubar/MenuBar.gif" WIDTH=600 HEIGHT=32
+ BORDER=0
+ ALT=" Home | Store | About | Progress | TNP | Videos | Visit | Links" USEMAP="#mainmap">
+
+<MAP NAME="mainmap">
+ <AREA SHAPE=RECT COORDS="15,0,70,31"
+      HREF="../../index.html" ALT="Main Menu">
+ <AREA SHAPE=RECT COORDS="80,0,140,31"
+     HREF="../../store/index.html" ALT="TMRC Store">
+ <AREA SHAPE=RECT COORDS="150,0,230,31"
+     HREF="../../about.html" ALT="About TMRC">
+ <AREA SHAPE=RECT COORDS="240,0,320,31"
+     HREF="../../progress/index.html" ALT="Progress">
+ <AREA SHAPE=RECT COORDS="330,0,390,31"
+     HREF="../../TNP/index.html" ALT="About the TNP">
+ <AREA SHAPE=RECT COORDS="400,0,460,31"
+     HREF="../../video/index.html" ALT="Videos">
+ <AREA SHAPE=RECT COORDS="470,0,520,31"
+     HREF="../../visit.html" ALT="Visit the Clubroom">
+ <AREA SHAPE=RECT COORDS="530,0,625,31"
+     HREF="../../links.html" ALT="Links">
+
+</MAP>
+
+</td>
+</tr>
+</table>
+
+
+
+<CENTER>
+<IMG SRC="../../images/cache/top_192117.16346.gif" HEIGHT=100 WIDTH=600 ALT="System 3 Display">
+</CENTER>
+
+<H1>System 3 Display Software</H1>
+
+<p>This page is sorta dull.  The next one has pictures.  Feel free to skip <A Href="scabops.html">ahead</A>.
+
+<UL>
+<LI><A HREF="scabmain.html">Background</A></li>
+<LI>Development</LI>
+<LI><A HREF="scabops.html">Operating</A></LI>
+<LI><A Href="scabtech.html">Technical details</A></LI>
+<LI><A Href="scabfut.html">Future work</A></LI>
+</UL>
+
+<H2>Development of the software cab</H2>
+
+<p>When the System 3 block cards were first connected to the rails in January, there was no easy way to send commands to the server.  The System 3 server, written in Java, includes a telnet server, allowing other processes to connect to it through a network connection.  The only way to send commands to the server, and through the server to the block cards, was to use an obscure and error-prone command line interface.  The problem with this was that the server would kick you off for most any syntax error.
+
+<p>The initial objective in developing the display software was to make it possible to run trains without needing to use the command line interface.  Python and the Tkinter GUI system were selected for their ease of use.  In addition to Tkinter, the standard Python library includes many useful functions for opening network connections, starting and stopping threads, and lots of other things that would be useful as the program's functionality expanded.  
+
+<p>Initially the program was simple.  It opened a window on the computer and connected to the server.  Through the window a user could enter a train name and a block number.  The program would then send a message to the server telling it to create a train in that block (this command tells the server that it should consider the objects, usually locomotives, occupying the specified block as a train).  The program would then create a second window, called a software cab, that displayed basic controls the operator could use to set the speed and direction of the train, or cause ot to drop out of the system.  At this point, the program made no attempt to process any of the data the server was sending its way.  So the prorgam had no idea if the block the user entered was occupied, or if the server actually responded to the commands sent to it.  But it was a great improvement in usability, allowing users to create and run trains using a software cab, or SCab, giving the display software the unpleasant name of SCab Picker.
+
+<p>Over the course of several months, more functionality has been added to the SCab program.  The program now processes messages from the server, telling it the status of the system and layout, displays a graphical view of the layout, allows switch throwing and train creation by clicking on the layout diagram, provides a means to edit the graphical layout display and other useful things.  The display software has now replaced all the functionality present in RSIG, making it a practical tool to operate the layout and run trains.  
+
+<HR>
+<TABLE BORDER=0 WIDTH="100%">
+	<TR>
+	<TD>
+		<ADDRESS>
+		<A HREF="../../index.html">Tech Model Railroad Club</A> of     
+		<A HREF="http://web.mit.edu/">
+		<img src="../../mit-redgrey-footer3.gif"
+		alt="MIT" width=42 height=24 align=absmiddle border=0></a> <BR>
+		MIT Room N52-118<BR>
+		265 Massachusetts Avenue<BR>
+		Cambridge, MA 02139<P>
+		</ADDRESS>
+	</TD>
+
+<!--foo!	<TD ALIGN=CENTER>
+		<A HREF="http://student.railfan.net/CMRA/" TARGET="parent">
+		<IMG SRC="/images/member.gif" WIDTH=88 HEIGHT=31 ALIGN="BOTTOM" BORDER=0></A><P>
+	</TD> -->
+
+	<TD align=RIGHT>
+		<ADDRESS>
+		+1 617 253-3269<br>
+		Email: <EM>tmrc-web@mit.edu</EM><br>
+		
+		</ADDRESS>
+	</TD>
+	</TR>
+<TR>
+<TD colspan=2>
+<FORM method="get" action="http://www.google.com/search">
+<INPUT type="text" name="q" size="31" maxlength="255" value="">
+<INPUT type="submit" value="Search TMRC">
+<INPUT type="hidden" name="sitesearch" value="tmrc.mit.edu">
+</FORM>
+</TD>
+</TR>
+</TABLE>
+</BODY>
+
+<!-- Mirrored from tmrc.mit.edu/sys3/scab/scabdev.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 25 Jul 2024 03:21:08 GMT -->
+</HTML>

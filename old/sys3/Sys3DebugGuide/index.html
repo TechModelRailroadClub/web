@@ -1,0 +1,605 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+
+<!-- Mirrored from tmrc.mit.edu//sys3/Sys3DebugGuide/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 25 Jul 2024 02:56:45 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=iso-8859-1" /><!-- /Added by HTTrack -->
+<HEAD>
+<TITLE>System3 Debug Guide</TITLE>
+<link rev=made href="mailto:tmrc-web@mit.edu">
+<link rev=owns href="mailto:tmrc-web@mit.edu">
+<link REL="SHORTCUT ICON" HREF="../../favicon.ico" type="image/x-icon">
+<LINK REL="stylesheet" HREF="../../tmrc.css" type="text/css">
+
+</head>
+<BODY bgcolor="#ffffff" text="#000000">
+<table background="../../menubar/MenuBack.gif" cellspacing=0 cellpadding=0 width="100%">
+<tr>
+<td align="center">
+<IMG SRC="../../menubar/MenuBar.gif" WIDTH=600 HEIGHT=32
+ BORDER=0
+ ALT=" Home | Store | About | Progress | TNP | Videos | Visit | Links" USEMAP="#mainmap">
+
+<MAP NAME="mainmap">
+ <AREA SHAPE=RECT COORDS="15,0,70,31"
+      HREF="../../index.html" ALT="Main Menu">
+ <AREA SHAPE=RECT COORDS="80,0,140,31"
+     HREF="../../store/index.html" ALT="TMRC Store">
+ <AREA SHAPE=RECT COORDS="150,0,230,31"
+     HREF="../../about.html" ALT="About TMRC">
+ <AREA SHAPE=RECT COORDS="240,0,320,31"
+     HREF="../../progress/index.html" ALT="Progress">
+ <AREA SHAPE=RECT COORDS="330,0,390,31"
+     HREF="../../TNP/index.html" ALT="About the TNP">
+ <AREA SHAPE=RECT COORDS="400,0,460,31"
+     HREF="../../video/index.html" ALT="Videos">
+ <AREA SHAPE=RECT COORDS="470,0,520,31"
+     HREF="../../visit.html" ALT="Visit the Clubroom">
+ <AREA SHAPE=RECT COORDS="530,0,625,31"
+     HREF="../../links.html" ALT="Links">
+
+</MAP>
+
+</td>
+</tr>
+</table>
+
+
+<CENTER>
+<IMG SRC="../../images/cache/top_88655.11143.gif" HEIGHT=100 WIDTH=600 ALT="Debug Guide">
+</CENTER>
+
+
+<H1>System3 Block Diagram</H1>
+
+<CENTER>
+<img SRC="Overall%20Block%20Diagram.gif" height=581 width=820>
+</CENTER>
+
+<P>The figure above is a block diagram of System3. The various elements have the following functions:
+
+<P>The System Computer runs the System3 server software, which is invoked by clicking on the Run Sys3 icon. The server controls the setting of switches and the powering of blocks by communicating with the Interface Message Processor (the IMP). The System Computer also runs the SCab display program that provides a graphical user interface invoked by clicking (only once!) on the SCab icon.  Although not part of System3, the TMRC2 Windows PC can monitor network traffic for debugging purposes via the Pic_test program. It also can access files on the System Computer ("Drive Y") via the Ethernet.
+
+<P>The IMP is a very specialized network card/device that performs two very important functions:
+<ul>
+<li>It generates tokens that control network traffic
+<li>It controls a random access memory, updated by orders from the System Computer, that represents the desired state of all switches and signals. The IMP reads the contents of that memory out to the switch cards on a repeating basis.</ul>
+
+<P>The Switch Card Bus protocol and electrical characteristics are discussed at http://tmrc.mit.edu/sys3/switchcard. The Switch Cards control the status of all track switches and lineside signals.
+
+<P>The Network Cards are of several types:
+<ul>
+<li>Block Cards monitor the occupancy of blocks and control speed and direction of trains within those blocks. 
+<li>Cab Interface Cards connect hand-held control boxes (cabs) to the network. The cabs can be either wired to jacks on the layout fascia panel or connected via radio link. 
+<li>The Touch Screen Interface Card interfaces the touch screen at the left end of the freight yard to the network.
+<li>The Turntable Interface Card interfaces the turntable control to the network. 
+<li>Other cards can also be connected to the network.</ul>
+
+<P>Further information about the Switch Card Bus, Switch Cards, and various types of Network Cards can be found at http://tmrc.mit.edu/sys3. Many of the applicable web pages are also included in the "Web Info" section at the back of this binder.
+
+
+<H1>Topology of the System3 Network</H1>
+
+<P>When debugging System3 problems, there are many occasions when one needs to know the topology of the System3 network. This information is available from three sources:
+<ul>
+<li>A listing called TMRC System 3 Bus addresses
+(C:\Home\TMRC\Sys3_development\SYS3 Bus Addresses)
+
+<P>This listing has the advantage of describing the network bus addresses in physical order, starting with the card nearest the IMP. Further, it tells the card type and the card location. However, while this list should be up-to-date, it may not be. Network cards may have been added or removed.</ul>
+<ul>
+<li>A program called Pic_Test
+(A shortcut on the Windows machine desktop)
+
+<P>This program uses a switch behind the System Computer. The switch should be in the UP position.</P>
+<CENTER>
+ <img SRC="MonitorSwitch.jpg" height=300 width=477>
+</CENTER>
+
+<P>With the switch in the UP position, this program displays the addresses of the network cards that are responding to the IMP. It does not say anything about the card types or locations, although the locations are generally in physical order, starting at the IMP, in the same fashion as SYS 3 Bus addresses. If all network cards are present and working, Pic_Test and SYS 3 Bus addresses should display the same card addresses. 
+
+<P>If the Pic_Test list is shorter than the SYS 3 Bus addresses list, there is a problem with the last card shown on Pic_Test, or the connection between that card and the next card, or the next card.
+
+<P>The Pic_Test program displays the card addresses in small boxes. If you click on an address box, the box's outline turns red and the data being sent onto the network by that card scrolls up the screen. An example entry would be:
+
+<P>FF 01 07 08 FF 26 00 FF FF FF FF FF  34 272
+
+<P>Where FF is start-of-packet, 01 is an OP code, 07 is the address you selected, 08 is the number data bytes that follow, FF 26 00 FF FF FF FF FF is the data, 34 is the checksum, and 272 is a running tally of the packets received.
+
+<P>When the switch is in the DOWN position, this program displays the addresses the computer is sending to the network cards, i.e. what cards it is trying to talk to. Further information is beyond the scope of this document.</ul>
+<ul>
+<li>Sys3 Debug Console
+<P>(A real-time listing of activity shown on the System Computer screen)
+
+<P>When the System3 program starts running on the System Computer, a sequence of commands will appear as the program communicates with the IMP and the various cards on the network.  While this has the advantage of telling you what is really happening on a real-time basis, it is a bit difficult to interpret.</li></ul>
+
+<H1>TMRC System 3 Bus Addresses</H1>
+
+<P>On the System Computer, (TMRC), you can find C:\Home\TMRC\Sys3 development\SYS3 Bus Addresses. It looks like this, but this is just a sample of what it looks like. This is not the updated list.
+
+<P>TMRC System 3
+Bus addresses
+
+<P>Note: cards are listed in order of distance from the IMP Addresses are not significant in card location.
+<blockquote><table>
+<tr><td>Number
+<td>Card Type (numeric)
+<td>Card type
+<td>Location
+
+<tr><td>0
+<td>1
+<td>IMP
+<td>Under tower
+
+<tr><td>99
+<td>4
+<td>Turntable
+<td>Engine yard
+
+<tr><td>240
+<td>3
+<td>Cab driver
+<td>F yard, east end
+
+<tr><td>7
+<td>2
+<td>Block card
+<td>Helix
+
+<tr><td>8
+<td>2
+<td>Block card
+<td>Helix
+
+<tr><td>9
+<td>2
+<td>Block card
+<td>Helix
+
+<tr><td>135
+<td>5
+<td>B'ville control panel
+<td>Berkmannville
+
+<tr><td>241
+<td>3
+<td>Cab driver
+<td>Berkmannville
+
+<tr><td>11
+<td>2
+<td>Block card
+<td>Under staging
+
+<tr><td>12
+<td>2
+<td>Block card
+<td>Under staging
+
+<tr><td>242
+<td>3
+<td>Cab driver
+<td>Foot of tower
+
+<tr><td>3
+<td>2
+<td>Block card
+<td>Cable storage area
+
+<tr><td>243
+<td>3
+<td>Cab driver
+<td>Oil plant 
+
+<tr><td>2
+<td>2
+<td>Block card
+<td>Cable storage area
+
+<tr><td>4
+<td>2
+<td>Block card
+<td>Cable storage area
+
+<tr><td>5
+<td>2
+<td>Block card
+<td>Cable storage area
+
+<tr><td>17
+<td>2
+<td>Block card
+<td>Under roundhouse
+
+<tr><td>1
+<td>2
+<td>Block card
+<td>Under roundhouse
+
+<tr><td>9
+<td>2
+<td>Block card
+<td>Under roundhouse
+
+<tr><td>10
+<td>2
+<td>Block card
+<td>Under roundhouse
+
+<tr><td>102
+<td>8
+<td>F yard controller
+<td>F yard, west end
+
+<tr><td>13
+<td>2
+<td>Block card
+<td>Under F yard (left)
+
+<tr><td>14
+<td>2
+<td>Block card
+<td>Under F yard (left)
+
+<tr><td>15
+<td>2
+<td>Block card
+<td>Under F yard (left)
+
+<tr><td>16
+<td>2
+<td>Block card
+<td>Under F yard (left)
+
+<tr><td>19
+<td>2
+<td>Block card
+<td>Under F yard (2nd cabinet)
+
+<tr><td>244
+<td>3
+<td>Cab driver
+<td>Middle Heights
+
+<tr><td>245
+<td>3
+<td>Cab driver
+<td>F yard, west end
+
+</table>
+</blockquote>
+
+
+
+
+<H1>Troubleshooting a Network Card</H1>
+
+<P>Once you have identified a suspect card, the first thing to do is to confirm that this is the correct suspect card. 
+<ul>
+<li>Using a female/female jumper plug, bypass the suspected card and restart Sys3.
+<CENTER>
+ <img SRC="BypassJumpers.jpg" height=300 width=551>
+</CENTER>
+<CENTER>
+ <img SRC="JumperDrawer.jpg" height=300 width=551>
+</CENTER>
+
+<li>If the problem goes away, you have found the correct card. If not, try bypassing the next card (or both this card and the next card).
+</ul>
+<P>First, and most obvious, confirm that the suspect card is getting power. If not, jiggle the power connectors. If that doesn't help, check the four power lights at the top edge of the tower nearest the System Computer and Windows PC. If any of these is out, cycle the system power off and on to reset the circuit protectors within the power supplies. Also check the manual circuit breakers under the tower to ensure that none of these has tripped.
+
+<P>If the suspect card is apparently getting power, reconnect it to the network and jiggle the network connectors. Restart Sys3 and see if this solves the problem.
+
+<P>If the problem affects only one block on the card, there is a possibility that the connection of the track feeders for that block has become loose. Check this.
+
+<H1> Block Card Debug Aids </H1>
+
+<CENTER>
+<img SRC="BlockCard.jpg" height=465 width=656>
+</CENTER>
+
+<P> Each block card serves eight blocks. The throttles for those eight blocks are mounted on a heat sink along one side of the card. At the end of the card nearest the throttles is a connector for the voltages used on the card. On older cards, the voltages are:
+<ul>
+<li> Yellow = +12 (regulated from +15 by external regulator, for relays)
+<li> Black = ground
+<li> Red = +5 (regulated from +7.5 by external regulator, for logic)
+<li> Violet = +18 (for track power)
+</ul>
+On newer cards, the voltages are:
+<ul>
+<li> Yellow = +15 (regulated on board to +12, for relays)
+<li> Black = ground
+<li> Red = 7.5 (regulated on board to +5, for logic)
+<li> Violet = +18 (for track power)
+</ul>
+
+<P> There are two sets of LEDs near the throttles. The red ones are labeled “Reverse” on the board. When lit, each indicates that the corresponding reverse relay is operated; the train is westbound. Two LEDs near the end of the package are labeled “+5” and “+12.” When lit, they indicate that the block card is receiving those voltages.
+
+<P> The green LEDs are labeled “DCC Select.” When lit, each indicates that the corresponding DCC selection relay has been operated; that block is connected to the (as yet unimplemented) DCC bus. The end-most LED is labeled “Status” and is the “heartbeat” LED. When lit, it indicates that the on-board processor is running.
+
+<P> In one corner of the board there are two RJ45 connectors, one black and one silver. (On older boards these are mounted on an auxiliary board.) The silver connector contains a cable that connects “upstream” (via other boards) to the IMP. The black connector contains a cable that connects “downstream” (via other boards) to the network terminator resistors. The silver connector contains a green LED that shows signalling activity going toward the IMP. The yellow LED on that connector shows signalling activity coming from the IMP.
+
+<P>The cables typically pass over a set of yellow LEDs labeled “Speed.” The brightness of each LED is proportional to the voltage being applied to the corresponding block. The two yellow LEDs at the end of the package are software debug LEDs.
+
+<P>There is one other set of connectors on the board - the track power leads. Blue wires go to the North rails and Orange wires go to the South rails
+
+<H1>Determining Which Block Card Powers Which Block</H1>
+
+<P>As an aid to operators, the block numbers shown on the SCab display are designated in a fashion that indicates their location. For example, block GC102 is in or near Gifford City; block FY12 is in or near the Freight Yard, etc. The block numbers shown on the display (called "dnames") are not the same as those used in the block card documentation.  This has the advantage that a particular block on the layout can be moved to a different block card without changing its name on the display. However, it also means that debugging a problem with a particular block requires that you translate between the block number shown on the display and the block number used in the block card documentation. 
+
+<P>There are three methods of doing the required translation:
+<ul>
+<li>At the SCab graphical display, depress the Ctrl key and click on the block in question. A small pop-up window will appear that includes information about this block. For example, if you Ctrl-click on block FY12, the information window will tell you that this is block B157. In newer parts of the layout, the first digits of the block number will be the block card number and the last number will be the block circuit (1 through 8) on that block card. In this case, it would be the 7th circuit on block card 15. This is not true in all cases, especially with older blocks (P-yard area). As a check, you might want to also confirm this information by consulting the real.lay file (see the last bullet).
+<li>Alternatively, go to Edit on the Scab Picker display and select List All Blocks. This will display real block numbers rather than "dnames." Right - click on a dname on the regular display and the corresponding block in the block list that is being displayed will turn blue and will be placed out-of-service. Repeat this process to restore the block to service. The block list display shows the signals on either side of the block, and the block's entry on the list will be red if occupied, pink if an advance block, blue if out of service (see previous sentences), or white if unoccupied.
+<li>Go to tmrc/sys3/server/real.lay on the System Computer and look near the end of the file, where there is a translation table between actual block numbers and display numbers. Once the actual block number is known, one can search an earlier part of the real.lay file to see which block card provides power for that block.
+One can access tmrc/sys3/server/real.lay on the System Computer by selecting the "K" in the lower left of the screen, scrolling up to editors, selecting emacs, and opening the file. When emacs has been selected a ./ will appear at the lower end of the dialog frame. Just type sys3/server/real.lay after the slash.</ul>
+<P>Note: If you Ctrl-click on a block that is shown as a thin gray line rather than the customary white, green, red, or pink, this indicates that the block has not been implemented or that system cannot communicate with the block card for that block.</P> 
+
+
+<H1>Determining Which Switch Card Powers Which Switch</H1>
+
+<P>Unlike the SCab display block numbers, which are designated in a location-descriptive fashion, the switch numbers shown on the display are the same numbers that are used in the switch card documentation.
+ 
+<P>There are two methods of determining which switch card controls a particular switch:
+<ul>
+<li> At the SCab graphical display, depress the Ctrl key and click on the switch in question. A small pop-up window will appear that includes information about this switch.
+<li>Go to tmrc/sys3/server/real.lay on the System Computer and look near the middle of the file, where there is a list that designates which switch card controls which switches.</ul>
+<P>Note: If you Ctrl-click on a switch that is shown as a gray oval rather than the customary white, this indicates that the switch has not been implemented or that system cannot communicate with the switch card for that switch. 
+
+<H1>The Real.lay File</H1>
+<P>At tmrc/sys3/server/real.lay there is a file that provides a substantial amount of information about System3.
+<H2>The Relationship Between Blocks and Switches</H2>
+
+<P>The first section of real.lay describes the relationship between blocks and switches. As described in http://tmrc.mit.edu/sys3/scab/scabops.html, turnout switches each have three connections, numbered 0, 1, and 2. Connection 0 is the base of turnout, connection 1 is the normal route through the switch and connection 2 is the route that will be followed when the switch is operated. A crossover switch adds a fourth connection, number 3, connected to number 2 when the switch is in the normal position.
+
+<CENTER>
+ <img SRC="Switch%20Terminology%20Diagram.gif" height=371 width=701>
+</CENTER>
+
+
+
+
+<P>The real.lay file uses the above nomenclature to describe which blocks are connected to points 0, 1, 2, and 3 (if provided) for each switch. A typical entry in this section is:
+
+
+<blockquote>
+<P><font face="Courier">Crossover S131
+<P><font face="Courier">Connect 0 	B194	1
+<P><font face="Courier">Connect 1	B192	0
+<P><font face="Courier">Connect 2	B191	0
+<P><font face="Courier">Connect 3	B193	1
+</blockquote><font face="default"></p>
+<P>Note: In some cases where there are switches close together, there will be a short stretch of track between switches that does not have its own block, but rather is powered by another block depending on the state of the switches. Such a "block" is referred to as a "swing block" and is designated by an S-number.
+
+
+<h3>Connectivity in Various Sections of the Layout</h3>
+<P>Real.lay begins with a list of connections in Berkmannville:
+<blockquote>
+<P><font face="Courier">Block B131 {
+	<P><font face="Courier">connect 0 S122 1 <font face="default">(The 0 end of Blk 131 connects to the 0 end of Sw 122)
+	<P><font face="Courier">connect 1 B193 0 <font face="default">(The 1 end of Blk 131 connects to the 0 end of Blk 193)
+
+<P><font face="Courier">Block B132 {
+	<P><font face="Courier">connect 0 S122 2 <font face="default">(The 0 end of Block 132 connects to the 2 end of Sw 122)
+	<P><font face="Courier">connect 1 B194 0 <font face="default">(The 1 end of Block 132 connects to the 0 end of Blk 194)
+
+<P><font face="Courier">Crossover S122 {
+	<P><font face="Courier">connect 0 B126 1 <font face="default">(The 0 end of Xover S122 connects to the 1 end of Blk 126)
+	<P><font face="Courier">connect 1 B131 0 <font face="default">(The 1 end of Xover S122 connects to the 0 end of Blk 131)
+	<P><font face="Courier">connect 2 B132 0 <font face="default">(The 2 end of Xover S122 connects to the 0 end of Blk 132)
+	<P><font face="Courier">connect 3 S121 1 <font face="default">(The 3 end of Xover S122 connects to the 1 end of Sw 121)
+	<P><font face="Courier">hand right
+
+<P><font face="Courier">Switch S121 {
+	<P><font face="Courier">connect 0 B127 1 <font face="default">(The 0 end of Sw S121 connects to the 1 end of Blk 127)
+	<P><font face="Courier">connect 1 S122 3 <font face="default">(The 1 end of Sw S121 connects to the 3 end of Sw 122)
+	<P><font face="Courier">connect 2 none <font face="default">(There is no connection to the 2 end - presumably a siding)
+	<P><font face="Courier">hand right 
+</blockquote><font face="default"></p>
+<P>The real.lay file contains similar information for Middle Heights (Middletown), Freight Yard mainline, Freight Yard, Turntable, Gifford City, P-Yard, and Staging Yard. Similar information for some of the switchcards is also included.
+
+<H2>Which Switch Cards Control Which Switches</H2>
+
+<P>The next section shows which switch cards control which switches. <P>Typical entries are:
+
+<P><blockquote><font face="Courier">SwitchCard 1 {
+	<P><font face="Courier">switches 0 {S33 S34 S35 S55 S36 S37 S71 S72}
+	<P><font face="Courier">input 0
+<P><font face="Courier">}
+<P><font face="Courier">SwitchCard 2 {
+	<P><font face="Courier">switches 0 {none S39 S51 S30 S28 S29 S31 S32}
+	<P><font face="Courier">input 0
+	
+<P><font face="Courier">}
+<P><font face="Courier">SwitchCard 3 {
+	<P><font face="Courier">switches 0 {none S53 S52 S73 S25 S26 S27 S49}
+	<P><font face="Courier">signals 1 {none 5 (S28-1 0) S1 (S27 1) S1 (S27 2) S1}
+	<P>input <font face="Courier">0
+</blockquote><font face="default"></p>
+
+<P>The switch numbers shown are the same as the switch numbers shown on the Scab display. Note that some of the switch cards also drive wayside signals. The listing indicates the number of signal heads and where located.
+
+
+<H2>Which Block Cards Control Which Blocks</H2>
+<P>The next section shows which block cards control which blocks. <P><P>Typical entries are:
+<blockquote>
+<P><font face="Courier">BlockCard 2 {
+	<P><font face="Courier">blocks {B11 B12 B13 B21 B22 B23 none B32}
+<P><font face="Courier">}
+
+<P><font face="Courier">BlockCard 3 {
+	<P>blocks {BX5 BX6 none none none none B26 B27}
+<P><font face="Courier">}
+
+<P><font face="Courier">BlockCard 4 {
+	<<font face="Courier">P>blocks {B10 B14 B20 B31 B24 none none none}
+<P><font face="Courier">}
+
+<P><font face="Courier">BlockCard 5 {
+	<P>blocks {B34 B35 B43 B44 B45 B46 none none}
+</blockquote>
+<font face="default">
+<H2>A Sample Listing of the Order of Cards on the Network</H2>
+
+<P>This listing begins as:
+<blockquote>
+<P><font face="Courier">Card: 	0	Card Type: 	1
+<P><font face="Courier">Card:	240	Card Type	3
+<font face="default">
+</blockquote>
+<P>This is only a sample listing, is marked as a comment, and should be ignored. The file "TMRC System 3 Bus addresses" is more informative and more up to date,
+
+<H2>A Sample Listing of the Sys3 Debug Console</H2>
+
+<P>The next section of real.lay is an example of the status report that is produced on the System Computer when System3 starts up. Like the "sample listing of the order of cards," this is not real-time information. However, some comments about the information shown might be useful.
+
+<P>For example:
+<blockquote>
+	<P>Card: 	0	Type: 	1 (imp)	Uptime: 0	seconds 	Reset: 0
+	<P>Card:	245	Type:	3 (protocab)	Uptime:	0 	seconds	Reset: 4	Overflows:	0	Overtime:	0
+	<P>Card:	8	Type:	2 (block)	Uptime: 443	seconds	Reset:	4	Overflows:	0	Overtime:	0	</blockquote>	
+
+<P>Uptime is measured from is a four-byte quantity that measures the time since the last reset in 60th of seconds. The values shown is not particularly important for debugging purposes. Rather, what is important is the fact that the number changes.
+<blockquote>
+<P>Reset - The kind of reset the card last had (power on, brownout, etc.
+<P>Overflows - Whether the receiver serial port has had any overflows.
+<P>Overtime - Whether we took too long going around the software loop.
+</blockquote>
+
+
+
+<H2>Translating Block Card Block Numbers to Display Block Numbers</H2>
+
+<P>The final section of real.lay is a list that translates block numbers from the block cards into display names (dnames). Typical entries are:
+<blockquote>
+<P>B10	BGC109
+<P>B11	BGC107
+<P>B12	BGC106
+</blockquote>
+<P>Thus, block card blocks B10, B11, and B12 correspond to display blocks GC109, GC107, and GC106 respectively. As their prefix indicates, they are all in Gifford City.
+
+
+
+<H1>Operating a Hardware Cab</H1>
+
+<H2>Assigning a Train to a Hardware Cab</H2>
+<P>(Telling System3 which train you want to run and which cab (control box) you want to use.)
+
+<P>At the SCab display, click on the block containing the train that you want to run. A dialog box will appear. The dialog box includes a list of hardware cabs that are available, i.e. plugged in and not yet in use by some other operator. Choose a cab by clicking on the small box next to the desired cab number.
+
+<H2>Operating in "Switching Areas," the Default Mode for Hardware Cabs </H2>
+
+<P>In the 105th Street area, the Freight Yard (East and West), Middle Heights, and Berkmanville (East and West), the switch layouts are sufficiently complex that an entrance-exit (NX) control system is used. It is basically a case of "I'm here and I want to go there." Each of the aforementioned locations contains a card with a diagram of the switching area and a switching area identifying area code, such as #19. 
+
+<P>By entering the area code, the operator is now ready to select a number from the left side of the drawing followed by a number on the right side of the drawing. The control system will then set up a route between those two points. For example,  the diagram for the 105th Street area is shown below:
+
+<H2>Available Hardware Cab Commands in a Switching Area </H2>
+<blockquote><ul>
+<li> * = Reverse
+<li> 07 = drop block behind
+<li> 09 = steal block ahead (traditionally called "call on")
+<li> # = prefix for selecting another  switching area
+</blockquote></ul>
+
+<CENTER>
+ <img SRC="Switching%20Area%20Diagram.gif" height=371 width=701>
+</CENTER>
+
+
+<P>Entering 1 then 2 will set up a route from the point marked 1 on the left to the point marked 2 on the right. The route will use the leftmost crossover. Entering 1 then 4 will set up a route between the same two points, but the route will use the rightmost crossover.
+
+
+<H2>Performing Switching Operations In Other Areas</H2>
+
+<P>When progressing from one of the switching areas discussed in the preceding section to another, enter #99, as that is the code for non-area switching. The following hardware cab commands are available: (New ones are shown in italics).
+
+<H2>Available Hardware Cab Commands Outside a Switching Area</H2>
+<blockquote><ul>
+<li>* = Reverse
+<li> 1-6 = throw 1st-6th facing point switch ahead. Counts from center of a block. With multi-block train, use of  7 may be required to ensure that count is done from loco block.
+<li>7 = drop block behind
+<li>8 = throw blocking switch
+<li>9 = steal block ahead
+<li># = prefix for selecting a switching area
+</blockquote></ul>
+
+
+<P>Using a hardware cab to perform switching operations in areas other than those listed above is a bit more complex, as it becomes very important to know where the centers of the various blocks are and to know which of the cars in your train "occupy."
+
+ <P>Consider the following case:
+
+<CENTER>
+ <img SRC="Switching%20Diagram.gif" height=96 width=701>
+</CENTER>
+
+<P>A train arriving from right to left, has uncoupled between cars A and B so that it can drop car A on the siding served by switch 108. If the operator enters a "1" without having reversed the locomotive, switch 100 will throw, as that is the next facing point switch ahead of the train. The more interesting possibilities are summarized in the following tables:
+<P>
+<table>
+<tr bgcolor=#eeeeee><td>Operator pressed a "7" (drop behind) before reversing
+<td>Car B and/or C occupies
+<td>Neither B nor C occupies
+<tr><td>Track between 100 and 108 is a separate block from track between 108 and 127
+<td>Pressing 1 throws 108
+<td>Pressing 1 throws 108
+<tr><td>If the tracks between 100 and 108 and between 108 and 127 are all one block, "7" has no effect, as there is no "behind."
+<td>Pressing 1 throws 108
+<td>Pressing 1 throws 108
+</table>
+<p>
+<table>
+<tr  bgcolor=#eeeeee><td>Operator reverses without pressing "7"
+<td>Car B and/or C occupies
+<td>Neither B nor C occupies
+<tr><td>Track between 100 and 108 is a separate block from track between 108 and 127
+<td>Pressing 1 throws 127
+<td>Pressing 1 throws 108
+<tr><td>Tracks between 100 and 108 and between 108 and 127 are all one block, with the block center between 100 and 108.
+<td>Pressing 1 throws 108
+<td>Pressing 1 throws 108
+</table>
+<P>After dropping the car on the siding, reversing to pull out of the siding, and passing over switch 108, the operator can reverse one more time, enter a "1" to re-line switch 108 for the main, and proceed to pickup cars B and C. It will probably be necessary to enter a "9" (steal block ahead) to move forward into the block containing cars B and C. 
+
+<P>Had the train upon its original arrival found switch 108 thrown against it, the operator could have entered an "8" (throw blocking switch) to throw switch 108 into the desired position.
+
+
+<HR>
+<TABLE BORDER=0 WIDTH="100%">
+	<TR>
+	<TD>
+		<ADDRESS>
+		<A HREF="../../index.html">Tech Model Railroad Club</A> of     
+		<A HREF="http://web.mit.edu/">
+		<img src="../../mit-redgrey-footer3.gif"
+		alt="MIT" width=42 height=24 align=absmiddle border=0></a> <BR>
+		MIT Room N52-118<BR>
+		265 Massachusetts Avenue<BR>
+		Cambridge, MA 02139<P>
+		</ADDRESS>
+	</TD>
+
+<!--foo!	<TD ALIGN=CENTER>
+		<A HREF="http://student.railfan.net/CMRA/" TARGET="parent">
+		<IMG SRC="/images/member.gif" WIDTH=88 HEIGHT=31 ALIGN="BOTTOM" BORDER=0></A><P>
+	</TD> -->
+
+	<TD align=RIGHT>
+		<ADDRESS>
+		+1 617 253-3269<br>
+		Email: <EM>tmrc-web@mit.edu</EM><br>
+		
+		</ADDRESS>
+	</TD>
+	</TR>
+<TR>
+<TD colspan=2>
+<FORM method="get" action="http://www.google.com/search">
+<INPUT type="text" name="q" size="31" maxlength="255" value="">
+<INPUT type="submit" value="Search TMRC">
+<INPUT type="hidden" name="sitesearch" value="tmrc.mit.edu">
+</FORM>
+</TD>
+</TR>
+</TABLE>
+</BODY>
+
+<!-- Mirrored from tmrc.mit.edu//sys3/Sys3DebugGuide/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 25 Jul 2024 02:57:56 GMT -->
+</HTML>

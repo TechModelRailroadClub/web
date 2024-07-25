@@ -1,0 +1,148 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+
+<!-- Mirrored from tmrc.mit.edu/sys3/scab/scabtech.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 25 Jul 2024 03:21:23 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=iso-8859-1" /><!-- /Added by HTTrack -->
+<HEAD>
+<TITLE>System 3 Display Software - Technical Details</TITLE>
+<link rev=made href="mailto:tmrc-web@mit.edu">
+<link rev=owns href="mailto:tmrc-web@mit.edu">
+<link REL="SHORTCUT ICON" HREF="../../favicon.ico" type="image/x-icon">
+<LINK REL="stylesheet" HREF="../../tmrc.css" type="text/css">
+
+</head>
+<BODY bgcolor="#ffffff" text="#000000">
+<table background="../../menubar/MenuBack.gif" cellspacing=0 cellpadding=0 width="100%">
+<tr>
+<td align="center">
+<IMG SRC="../../menubar/MenuBar.gif" WIDTH=600 HEIGHT=32
+ BORDER=0
+ ALT=" Home | Store | About | Progress | TNP | Videos | Visit | Links" USEMAP="#mainmap">
+
+<MAP NAME="mainmap">
+ <AREA SHAPE=RECT COORDS="15,0,70,31"
+      HREF="../../index.html" ALT="Main Menu">
+ <AREA SHAPE=RECT COORDS="80,0,140,31"
+     HREF="../../store/index.html" ALT="TMRC Store">
+ <AREA SHAPE=RECT COORDS="150,0,230,31"
+     HREF="../../about.html" ALT="About TMRC">
+ <AREA SHAPE=RECT COORDS="240,0,320,31"
+     HREF="../../progress/index.html" ALT="Progress">
+ <AREA SHAPE=RECT COORDS="330,0,390,31"
+     HREF="../../TNP/index.html" ALT="About the TNP">
+ <AREA SHAPE=RECT COORDS="400,0,460,31"
+     HREF="../../video/index.html" ALT="Videos">
+ <AREA SHAPE=RECT COORDS="470,0,520,31"
+     HREF="../../visit.html" ALT="Visit the Clubroom">
+ <AREA SHAPE=RECT COORDS="530,0,625,31"
+     HREF="../../links.html" ALT="Links">
+
+</MAP>
+
+</td>
+</tr>
+</table>
+
+
+<CENTER>
+<IMG SRC="../../images/cache/top_192117.16346.gif" HEIGHT=100 WIDTH=600 ALT="System 3 Display">
+</CENTER>
+
+<H1>System 3 Display Software</H1>
+
+<p>No more pictures from here on out...</p>
+
+<UL>
+<LI><A HREF="scabmain.html">Background</A></li>
+<LI><A HREF="scabdev.html">Development</A></LI>
+<LI><A HREF="scabops.html">Operating</A></LI>
+<LI>Technical details</LI>
+<LI><A Href="scabfut.html">Future work</A></LI>
+</UL>
+
+<H2>Technical details</H2>
+
+<H3>Programming language</H3>
+
+<p>The display program is written in Python using the built in Tkinter GUI toolkit.  Python is an open source language that is available for a variety of platforms, including assorted versions of Unix, Windows 9x/NT, and the Macintosh.  It is an object oriented language that allows you to ignore the object oriented features at will, and it comes with a large built-in library. Python falls somewhere between an interpreted and a compiled language.  Python source code is compiled to byte code which is the run by an interpreter.  The same compiled Python code can be run by interpreters on different platforms (assuming the underlying functions are supported on the different platforms.)  While interpreted languages often have a reputation for poor performance, Python has so far proven to be more than fast enough for the display program.  In addition, Python can be run interactively allowing the programmer to examine and fiddle with variables and functions while programs are running.  This is a big help for debugging.
+
+<p>Tkinter is based on the Tk tool set that is more commonly used with the Tcl scripting language.  This tool set was seleced partially for its close interconnections with Python, and partially for its ease of use.  It includes all the basic widgets (windows, labels, buttons, etc.), and more advanced widgets are available in a program called Python MegaWidgets, written in pure Python/Tkinter.  So far, almost all of the widgets used in the display program have been unmodified Tkinter and PMW widgets.
+
+<em><p>For more information about the languages and tools used to write the display software please visit:</p>
+
+<UL>
+<LI>Python programming language: <A href="http://www.python.org/">www.python.org</A></li>
+<LI>Tkinter documentation at Pythonware: <a href="http://www.pythonware.com/library/tkinter/introduction/index.htm">www.pythonware.com/library/tkinter/introduction/index.html</A></LI>
+<LI>Python MegaWidgets: <A href="http://pmw.sourceforge.net/">pmw.sourceforge.net</A></LI>
+</UL>
+</em>
+<H3>Communication protocol</H3>
+
+<p><em>Note: This is only an overview of the protocol.  A more in-depth version of this should be written some time, but for now it is mostly documented in comments in the display program source code.</em>
+
+<p>The display program and server communicate over a socket connection by sending a variety of specially formatted text messages.  These messages are formatted as Lisp s-expressions due to the relative ease of parsing and the availability of a parser for the Java based server program.  No suitable parser was found for Python so one had to be written.  S-expressions are read from the socket and broken out into s-expressions in a separate thread.  This thread places the parsed s-expressions onto a queue from which they are removed by the main thread.  Messages are in turn passed to a single function to be written to the socket.  This is mostly a convenience issue that provides an easy way to log and print out commands as they are sent to the server.
+
+<p>When the display program first connects to the server, it goes through a basic login procedure.  The server first sends a large number of messages to define all the track elements in the layout, and then a many more messages to define the status of all the elements.  Once this information has been sent the display program requests information about the interconnections between the blocks and switches.  Once all the elements and their connections are defined the display program loads a local file that provides the information needed to correctly format the layout display.  (If the layout as sent by the server and the layout as defined in the file do not match, the display may be corrupted.  When this happens it is necessary to edit the display properties and create a new layout file.)  The display program then creates and activates the display windows.
+
+<p>Once the display is created the server and display program continue sending each other messages.  The display program sends commands to the server and the server sends commands to the display program to add trains, update the status of blocks and switches, and so forth.  The display program only updates the status of elements and controls in response to messges from the server (with one exception).  This means that if you click on a switch in the display program, the display program will not change the position of the switch until the server sends it a message telling it that the switch position has changes.  This may lead to problems due to lag in the server or network, with a user clicking on a switch multiple times before it changes, but so far this has not been an issue.  This also means that if the display program is unable to connect to the server, most of the commands will have no apparent effect (messages generated while the display program is disconnected are silently discarded).  The one exception has to do with the speed control slider in the SCab window.  Although this will update in response to messages from the server, it can also be moved by the operator to set the speed.  The display program checks the slider 10 times a second, and only sends speed messages when the slider value has changed.  This generally seems to work.
+
+<H3>Console window and logger</H3>
+
+<p>Python programs are typically run from a command line, which conveniently provides a place to print warning and error messages.  A large number of messges go flying back and forth between server and display program, and it is not helpful to print them all out.  Instead all messages sent to the server, all messages received from the server, and all error messages produced by the display program are sent to a logger program along with one of three priorities.  Each message is placed into a list of messages (limited by default to 250 messages).  One list exists for messages from the server, one for messages to the server and one for error messages.  Only if the priority level of a message exceeds a user specified level will a message be printed.  As one might expect, error messages and warning messages fromt eh server have a higher priority than routine messages.  By default, only high priority messges will be printed in the console window.
+
+<p>Eventually, some mechanism will be provided to view the contents of each message list.  Eventually.
+
+<H3>Loading of data files</H3>
+
+<p>The display program is able to load and save layout and display properties from files.  These data in these files is formatted the same way it is formatted in the messges sent by the server, with one s-expression per line.  The files are loaded in, broken into whole s-expressions, parsed, and passed to the same s-expression handling routine used for messages sent by the server.  THe file loading routine makes no distinctions between different files; all are loaded and processed by the same functions.  The display program makes no distinction between messages loaded from files and those sent by the server.  This makes is conceivable that data loaded from a file could trick the display program into thinking the state of blocks, switches, trains, etc. is different than it really is.  At some point, something should perhaps be done about this.  
+
+<H3>Editing display properties</H3>
+
+<p>The program provides a graphical method to edit the display properties.  In broad terms, display properties control the appearance of the layout in the display program.  This includes things like how long blocks and switches should be, whether switches are right or left handed, and a huge number of other things.  The display program loads this data from a file at startup, and from time to time it is necessary to update this file.  Typically it is required when the layout as defined by the server changes.  
+
+<p>The editing process is rather obscure, and is only fully understood by the author of the program, and even he's not sure about it at times.  This part of the program will probably be replaced at some point relatively soon, along with all the code to draw block and switches which just don't do all they should.  
+
+<p>Whenever the layout in the server changes the local copy of the layout file should be updated.  This is the file that the display program loads when it is unable to connect to the server at startup.  If this file doesn't match the servers version of reality, odd things can happen if the program later connects without being restarted.  In fact, it's probably a good idea to restart the display program if it doesn't connect at startup, just in case something is off.
+
+<HR>
+<TABLE BORDER=0 WIDTH="100%">
+	<TR>
+	<TD>
+		<ADDRESS>
+		<A HREF="../../index.html">Tech Model Railroad Club</A> of     
+		<A HREF="http://web.mit.edu/">
+		<img src="../../mit-redgrey-footer3.gif"
+		alt="MIT" width=42 height=24 align=absmiddle border=0></a> <BR>
+		MIT Room N52-118<BR>
+		265 Massachusetts Avenue<BR>
+		Cambridge, MA 02139<P>
+		</ADDRESS>
+	</TD>
+
+<!--foo!	<TD ALIGN=CENTER>
+		<A HREF="http://student.railfan.net/CMRA/" TARGET="parent">
+		<IMG SRC="/images/member.gif" WIDTH=88 HEIGHT=31 ALIGN="BOTTOM" BORDER=0></A><P>
+	</TD> -->
+
+	<TD align=RIGHT>
+		<ADDRESS>
+		+1 617 253-3269<br>
+		Email: <EM>tmrc-web@mit.edu</EM><br>
+		
+		</ADDRESS>
+	</TD>
+	</TR>
+<TR>
+<TD colspan=2>
+<FORM method="get" action="http://www.google.com/search">
+<INPUT type="text" name="q" size="31" maxlength="255" value="">
+<INPUT type="submit" value="Search TMRC">
+<INPUT type="hidden" name="sitesearch" value="tmrc.mit.edu">
+</FORM>
+</TD>
+</TR>
+</TABLE>
+</BODY>
+
+<!-- Mirrored from tmrc.mit.edu/sys3/scab/scabtech.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 25 Jul 2024 03:21:23 GMT -->
+</HTML>
