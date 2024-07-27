@@ -29,6 +29,13 @@ navbar:
       sublinks:
         - name: Overview
           link: '/system4'
+        - name: Block Cards
+          link: '/system4/block_cards.html'
+        - name: Throttles
+          link: '/system4/throttles.html'
+        - name: Web Dispatcher
+          link: '/system4/web_control.html'
+        
         
     - name: Old Site
       link: "/old"
