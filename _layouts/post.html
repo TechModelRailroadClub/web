@@ -5,8 +5,8 @@
   <div class="bg-light container col-lg-8 min-vh-100">
     <div class="px-4 py-5 my-5 " >
       <h1 class="display-5 fw-bold text-center">{{page.title}}</h1>
-      {% if page.author %}
-      <h5 class="mb-2 text-body-secondary text-center">{{page.author}}</h5>
+      {% if page.date %}
+      <h5 class="mb-2 text-body-secondary text-center">{{ page.date | date: "%-d %B %Y" }}</h5>
       {% endif %}
       <hr>
       <br>

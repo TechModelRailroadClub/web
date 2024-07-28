@@ -33,7 +33,7 @@ navbar:
           link: '/system4/block_cards.html'
         - name: Throttles
           link: '/system4/throttles.html'
-        - name: Web Dispatcher
+        - name: Web Dispatch
           link: '/system4/web_control.html'
         
         
