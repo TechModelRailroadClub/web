@@ -14,6 +14,7 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 
 navbar:
   logo: /assets/img/tmrc.svg
+  title: Tech Model Railroad Club
   links:
     - name: Home
       link: "/"
