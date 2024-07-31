@@ -36,17 +36,26 @@ navbar:
           link: '/system4/throttles.html'
         - name: Web Dispatch
           link: '/system4/web_control.html'
-        
-        
     - name: Old Site
       link: "/old"
+
+carousel:
+  - image: /assets/img/layout/carousel/trolley_barn.jpeg
+    alt_text: The MITCo Trolley Barn
+  - image: /assets/img/layout/carousel/trolley.jpeg
+    alt_text: A MITCo Trolley in Gifford City
+  - image: /assets/img/layout/carousel/union_station.jpeg
+    alt_text: Gifford City Union Station
+  - image: /assets/img/layout/carousel/roundhouse.jpeg
+    alt_text: The Tech Nickel Plate Roundhouse
+
 
 footer:
   links:
     - name: MIT Homepage
       link: https://www.mit.edu/
     - name: GitHub Repositories
-      link: https://github.com/tech-model-railroad-club
+      link: https://github.com/TechModelRailroadClub
 
 
 exclude: ["CNAME", "LICENSE", "README.md", "Dockerfile"]

@@ -7,14 +7,28 @@ title: Home
 <body class="bg-light">
     {% include nav.html %}
     <div class="bg-light container col-lg-8">
-        <div class="px-4 py-5 my-5 text-center">
-            <div class="rotate-wrapper">
-                <img src="{{ site.baseurl }}{{ site.navbar.logo }}"
-                    style="-webkit-filter: invert(100%); filter: invert(100%);" alt=""
-                    class="d-inline-block align-text-top text-center px-1 py-5 rotate">
+        <div class="px-4 py-5 text-center">
+            <div id="MainCarousel" class="carousel slide m-5" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    {% for item in site.carousel %}
+                    <div class="carousel-item active">
+                        <img src="{{ site.baseurl }}{{ item.image }}" class="d-block w-100 rounded" alt="{{ item.alt_text }}">
+                    </div>
+                    {% endfor %}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#MainCarousel"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#MainCarousel"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
             </div>
-            <h1 class="pb-3 text-center">{{site.title}}</h1>
-            <div class="mx-auto">
+            <h1 class="text-center">{{site.title}}</h1>
+            <div class="py-3 mx-auto">
                 <p class="lead text-center">{{site.description}}</p>
             </div>
             <br>
@@ -26,7 +40,9 @@ title: Home
                 <div class="col-md-8">
                     <div class="card m-2 post-preview text-start">
                         <div class="card-body">
-                            <a href="{{ post.url | relative_url }}"><h5 class="card-title">{{post.title}}</h5></a>
+                            <a href="{{ post.url | relative_url }}">
+                                <h5 class="card-title">{{post.title}}</h5>
+                            </a>
                             <h6 class="card-subtitle mb-2 text-body-secondary">{{ post.date | date: "%-d %B %Y" }}</h6>
                             <p class="card-text">{{post.excerpt}}</p>
                             <!-- <div class="d-flex justify-content-center"><a href="{{ post.url | relative_url }}"
