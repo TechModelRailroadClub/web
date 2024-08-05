@@ -1,0 +1,9 @@
+---
+title: Monthly Update July 2006 
+layout: post
+author: Tom N. Paulsen
+---
+
+
+
+ **July 26**The system was bad tonight. Specifically, when power was turned on, all the block cards set all their blocks to full power, resulting in some degree of mayhem. The source of the mayhem was traced to malprogrammage of the block cards. One feature of the items on the block card network is an ability to load new programming over the network. Normally this is a good thing making it much easier to update the software. Unfortunately, under certain circumstances, it is possible to accidentally reprogram all the items on the block card at once, with the same software, and with the same address. Apparently someone managed this feat last night while working on a wireless cab design. As a result, the block cards, and pretty much everything else on the network, were running the code for the wireless cab. In fairness to this person, this is the second time this has happened, indicating that perhaps more thought should have gone into designing the reprogramming process.  In any event, Tom and new member David Dalrymple spent the evening crawling under the layout to reset each card individually so they could be programmed. (Cards can normally be reset over the network, but since they were all reprogrammed with the same address...) All of the block cards and the turntable were reprogrammed by the end of the night. Two of the cab interface boards were running an older version of the software that did not allow programming over the network. The rest will be reprogrammed once JP brings in the code for them.    **July 29**John Purbrick brought in the source code for the cab interface boards and reprogrammed them, undoing the last of the damage wrought a few days ago. The system appears to be working normally now. Tom parked some trains that were still scattered around the room from Wednesday night.    

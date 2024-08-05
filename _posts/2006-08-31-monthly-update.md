@@ -1,0 +1,9 @@
+---
+title: Monthly Update August 2006 
+layout: post
+author: Tom N. Paulsen
+---
+
+
+
+ **August 2**Anthony Rizos stopped by to discuss plans for promoting the club to incoming students. Tom and John McNamara went on a soda buying trip as we were sold out of everything except diet, and frankly, who wants that. Hugh attempted to figure out how to use SVN, which is used to store and maintain source code for the various bits of the system. The system wasn't working for unknown reasons. The network appears to be working, except the server doesn't see anything on the block card network. Tom attempted to blame this on Hugh, with limited success. **August 5**Tonight it was quiet at the club. We had one visitor, who was attending an event upstairs. The system is still being bad so trains aren't running.  **August 7**The System is fixed. The problem was a bad solder joint in the *outgoing* data channel from the server. Because the server won't recognize any card which doesn't respond to a status request, and it needs the outgoing line to send such requests, it was ignoring all cards except the IMP. The solder job in question was done on July 26, when we suffered a severe breakdown, as previously described. So one thing leads to another. We think it's all fixed now.  **August 30**Tom, JP, John McNamara and Tomasz helped get the club ready for the upcoming Activities Midway, which is now only two days away. The Green Building was removed from the layout, and the dead lightbulb replaced. The crossing signal was taken down from the wall and the wheels were attached, and various bits and pieces for the portable demo layout were boxed up to reduce the amount of work needed Friday.   

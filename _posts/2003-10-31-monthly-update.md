@@ -1,0 +1,9 @@
+---
+title: Monthly Update October 2003 
+layout: post
+author: Tom N. Paulsen
+---
+
+
+
+ **October 11**Here's what's going on at TMRC as of this past Wednesday night:  John Purbrick is working on the analog clock that is built into the Berkmannville station over near the painting area. As shown in the first attached photo, the clock drive uses a microprocessor\-driven stepper motor. While this clock does not need a temperature display, other clocks around the layout will. An outdoor temperature sensor and associated interface to the TMRC computers would be a nice project for someone.  Genya Zaytman and James Knight are working on System 3 software for wireless cabs, as shown in the second attached photo.  Alvar Saenz\-Otero has resumed work on the scale model of the Green Building, upon which hallway visitors will be able to play Tetris. The new plan is that the control panel will interface to TMRC's network, the wiring for which is available at the room lights control panel near the proposed Tetris control panel. The Tetris control panel and the lighting boards within the Green Building are future design tasks in which one of our new members (Scott?) and possibly others have expressed interest.  In other work, both Malcolm Laughlin and Ed Drozd are assembling freight car kits, but there are plenty more to be done. Andy Miller is painting a set of cars for a daytime (no sleepers) express passenger train, the *Benedict Arnold*. David Lambeth is working on building fronts for a wall of buildings that separate the Gifford City passenger station area from the industrial area behind it. John McNamara is adding finishing touches to the Digital Widgets building; and there are some other projects underway on Saturday.  As you can see, there are plenty of things to be done. Stop by and join in!  *John McNamara*   

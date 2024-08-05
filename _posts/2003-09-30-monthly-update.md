@@ -1,0 +1,9 @@
+---
+title: Monthly Update September 2003 
+layout: post
+author: Tom N. Paulsen
+---
+
+
+
+ **September 3**The past few weeks were all about getting ready for the Activities Midway and the start of term. As reported below, on Aug 24th the loop was completed. On Aug 29th the Midway took place, with a great attendance to both our booth and subsequent Open House. At this point the layout is still operational, but now that the term started, people have begun to play with more parts of it (in both hardware and software)...  **James** and **Genya** played quite a bit with the server software to start a major upgrade that will allow 'yard operation' to happen. Once both the server and the GUI are integrated, operators will be able to click on a *starting* block and on an *end* block, and the server will setup the route automatically. Of course, major thought went into how to make things more robust (complicated? :\-). I'm quite sure the system will still work by the end of the night.  **David** and **Tom** discussed about many major scenic projects in the layout, including some major construction that can still happen in Gifford City. The discussion extended to parts of the peninsula too.  **John McNamara** worked on the interior of the Digital Widgets building. **John Purbick** did substantial work in Berkannville: installed a plug pannel for the walk\-around cabs, installed switch machines in the eastward switches, and fixed some wires that suffered during scenic work. **Alvar** worked on updating the webpage with the [project matrix]({{ site.baseurl }}/old/progress/reports/2003/9/../../../../Projects/Projects.html), and starting some work on the Green Building lights controls whom Scott and him are building. **Ed** worked on the Benedict Arnold locomotives, and the new SD40's that he painted during the summer.  *Alvar*   

@@ -1,0 +1,15 @@
+---
+title: Monthly Update November 2008 
+layout: post
+author: Tom N. Paulsen
+---
+
+
+
+ **November 15**  Tonight was clean\-up night at TMRC in preparation for next Saturday's open house. The club room is cleaner than it's ever been, we think. Every semester we clean a little harder and discover even more junk than the semester before.    Here's some progress from the past month that hasn't been reported yet:       David L. installed backdrops all the way across the bottom of the tower, from the freight yard at the new Madlinger Chemical building to the ladder behind Comfort Candy and the Digital Widgets offices. He also painted the underside of the tower sky blue, a messy but necessary process. The notches in the backdrop are for a loop of upper level track that will come from Tuckerton.     Quentin added a switch to the working crossing gates at Middle Heights. This switch performs the vital function of shutting off the crossing bell when we get sick of it.      John Purbrick has been extending the cut between Berkmannville and East Berkmannville with some new retaining walls and underbrush.         Our car cards now reside in neat card pockets on the fascia. The pockets are attached with industrial velcro, so they can be removed if necessary. David L. built the pockets, John McNamara added the labels, and John Purbrick has been painting the cab jacks yellow to make them easier to find.     Another recent improvement courtesy of JP has been the extension of a retaining wall and weeds along the front edge of the freight yard as far as Killianport commuter station.     Gifford City now has a new fire station! This is the last of several attempts to kitbash a building to fit this oddly shaped lot, a challenge that caused the firehouse to be one of the last buildings to be completed in Gifford City. **November 22** Many thanks to everyone who came to our fall Open House! We had lots of visitors, including an unusually large group for the evening portion thanks to word getting around a few model railroader newsgroups. In addition to several trains running around the mainline and the two camera cars, we also used the new throttles to do some switching in the freight yard and run a train around the layout manually amid all the other traffic. A few lucky young visitors got the chance to handle the throttle, which must have been quite a thrill!  Continuing a trend that has been going on for several years, the number of problems we encountered was fewer than at the spring Open House. Only a couple cars or locomotives misbehaved, and only one (very hard to reach) switch gave us any problems with the trackwork. The system did well, except for a couple incidents when reversing one train to re\-rail its cars caused the following train to become part of it. Genya was our tireless operator during the afternoon session, helping to keep the trains running. Thanks also goes to Tom, Quentin, Hugh, John Purbrick, Bill Onorato, Andy Miller, and David Lambeth for helping out. Special thanks to John Shriver for getting the trollies ready.  Photos from the Open House:   
+  
+  
+  
+  
+ 
+ 

@@ -1,0 +1,9 @@
+---
+title: Monthly Update October 2000 
+layout: post
+author: Tom N. Paulsen
+---
+
+
+
+ **October 4**Starting next week we will change our standard work sessions from Tuesdays to **Wednesdays** to better fit our academic schedules. The times remain the same: 7\-10pm.  **October 11**Now that the trackwork for the staging yard (S\-yard) is essentially complete, attention has turned to other aspects of the S\-yard design. Alvar Saenz\-Otero began documenting the wiring needed for the various 8\-switch control units that will be required. Malcom Laughlin started planning, and cutting pieces for, the ramp that will take trains down from S\-yard to Berkmannville. He also did some planning for Berkmannville itself.  John Purbrick did some wirewrapping work on a "switch interface expander" which is basically a communications hub for interfacing System3 to the switch controllers. Stefano Curtarolo assisted.  Ed Drozd worked on the foundation of a building that was near Coca\-Bubblie. (This may be an Ed Spoles building formerly called Olivieri Typewriter.) Ed also altered some ground cover that he has added behind the roundhouse. John McNamara continued his work on the parking lot behind the roundhouse and showed off some detail parts that he has purchased for the roundhouse. **October 25**Jeff Birkner, Malcolm Laughlin, John McNamara, and John Purbrick discussed the design of Berkmannville and made some measurements. On the one hand, it is desireable from a scenic and operational standpoint to have Berkannville fairly wide. On the other hand, it is desireable from a room access standpoint to have the aisles fairly wide. Malcolm will make scale drawings of the area in question and explore some alternatives. Professor Katsuma Hidetosi visited, presenting us with a calendar of nifty new Japanese trains and the news that an interesting private car now adorns track 8 at South Station. He will be in town until Sunday, 5 November.   

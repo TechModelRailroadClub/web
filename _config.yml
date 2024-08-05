@@ -58,5 +58,5 @@ footer:
       link: https://github.com/TechModelRailroadClub
 
 
-exclude: ["CNAME", "LICENSE", "README.md", "Dockerfile"]
+exclude: ["CNAME", "LICENSE", "README.md", "Dockerfile", "Makefile", "scripts"]
 
