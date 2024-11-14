@@ -11,6 +11,7 @@ RUN jekyll build
 
 FROM debian
 COPY --from=0 /jekyll/_site/ /usr/share/nginx/html/
+RUN echo "nginx; /usr/bin/certbot --non-interactive --agree-tos -m tmrc-web@mit.edu --nginx -d tmrc.mit.edu" > /entrypoint.sh && chmod +x /entrypoint.sh
 RUN apt-get update && apt-get install -y python3 python3-venv libaugeas0 nginx
 RUN python3 -m venv /opt/certbot/
 RUN /opt/certbot/bin/pip install --upgrade pip
@@ -21,7 +22,7 @@ EXPOSE 80 443
 
 STOPSIGNAL SIGQUIT
 
-CMD ["nginx; certbot --non-interactive --agree-tos -m tmrc-web@mit.edu --nginx -d tmrc.mit.edu" ]
+CMD ["/entrypoint.sh"]
 
 
 
