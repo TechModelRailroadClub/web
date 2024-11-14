@@ -9,9 +9,9 @@ RUN sed -i 's/"\/tmrc-web"//g' _config.yml
 
 RUN jekyll build
 
-FROM nginx
+FROM debian
 COPY --from=0 /jekyll/_site/ /usr/share/nginx/html/
-RUN apt install -y python3 python3-venv libaugeas0
+RUN apt install -y python3 python3-venv libaugeas0 nginx
 RUN python3 -m venv /opt/certbot/
 RUN /opt/certbot/bin/pip install --upgrade pip
 RUN /opt/certbot/bin/pip install certbot certbot-nginx
