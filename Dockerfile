@@ -8,8 +8,8 @@ RUN hugo --gc --minify
 FROM nginx
 COPY --from=build /site/public/ /usr/share/nginx/html/
 RUN echo "#!/bin/sh" >> /entrypoint.sh
-RUN echo "nginx -g 'daemon off; &'" >> /entrypoint.sh
-RUN echo "/usr/bin/certbot -v --non-interactive --agree-tos -m tmrc-web@mit.edu --nginx -d tmrc.mit.edu" >> /entrypoint.sh
+RUN echo "nginx -g 'daemon off;' &" >> /entrypoint.sh
+RUN echo "sleep 5 && /usr/bin/certbot -v --non-interactive --agree-tos -m tmrc-web@mit.edu --nginx -d tmrc.mit.edu" >> /entrypoint.sh
 RUN echo "tail -f /dev/null" >> /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 RUN apt-get update && apt-get install -y python3 python3-venv libaugeas0 nginx
