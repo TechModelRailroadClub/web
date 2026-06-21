@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {{ partial "head.html" . }}
+</head>
+<body>
+  {{ partial "nav.html" . }}
+  <main>
+    <div class="error-page">
+      <span class="eyebrow"><span class="block-light is-red"></span>Block Occupied &mdash; Track Not Found</span>
+      <h1>404</h1>
+      <p>The requested page could not be found. It may have been rerouted, or the line was never laid.</p>
+      <a class="btn btn-primary" href="/">Back to the Yard</a>
+    </div>
+  </main>
+  {{ partial "footer.html" . }}
+</body>
+</html>

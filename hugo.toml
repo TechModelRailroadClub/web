@@ -1,0 +1,90 @@
+baseURL = "/"
+locale = "en-US"
+title = "Tech Model Railroad Club"
+copyright = "Tech Model Railroad Club"
+
+enableRobotsTXT = true
+disableKinds = ["taxonomy", "term"]
+
+[params]
+  shortTitle = "TMRC"
+  email = "tmrc-web@mit.edu"
+  description = "The Tech Model Railroad Club is an MIT student activity founded during the 1946-1947 school year, making TMRC one of the oldest clubs at MIT. This site contains information on the club, both past and present. There is information about the early days of the club, when we were located in Building 20, and the current activities of the club in our current home, Building N52, where we've been since 1997. If you'd like to visit the club, we're usually happy to welcome visitors during our regular meetings, and hold an open house twice a year, when you can be sure that lots of trains will be running. MIT students are always welcome to visit and join the club."
+
+  [[params.gallery]]
+    image = "/assets/img/layout/carousel/union_station.jpeg"
+    alt = "Gifford City Union Station"
+  [[params.gallery]]
+    image = "/assets/img/layout/carousel/trolley_barn.jpeg"
+    alt = "The MITCo Trolley Barn"
+  [[params.gallery]]
+    image = "/assets/img/layout/carousel/trolley.jpeg"
+    alt = "A MITCo Trolley in Gifford City"
+  [[params.gallery]]
+    image = "/assets/img/layout/carousel/roundhouse.jpeg"
+    alt = "The Tech Nickel Plate Roundhouse"
+  [[params.gallery]]
+    image = "/assets/img/layout/carousel/turntable.jpeg"
+    alt = "The Tech Nickel Plate Turntable"
+
+  [[params.footerLinks]]
+    name = "MIT Homepage"
+    link = "https://www.mit.edu/"
+  [[params.footerLinks]]
+    name = "GitHub Repositories"
+    link = "https://github.com/TechModelRailroadClub"
+
+[[menu.main]]
+  name = "About"
+  url = "/about/"
+  weight = 10
+
+[[menu.main]]
+  name = "News"
+  url = "/posts/"
+  weight = 20
+
+[[menu.main]]
+  name = "System 3"
+  url = "/system3/"
+  weight = 30
+
+[[menu.main]]
+  identifier = "system4"
+  name = "System 4"
+  url = "/system4/"
+  weight = 40
+
+[[menu.main]]
+  parent = "system4"
+  name = "Overview"
+  url = "/system4/"
+  weight = 41
+
+[[menu.main]]
+  parent = "system4"
+  name = "Block Cards"
+  url = "/system4/block_cards/"
+  weight = 42
+
+[[menu.main]]
+  parent = "system4"
+  name = "Throttles"
+  url = "/system4/throttles/"
+  weight = 43
+
+[[menu.main]]
+  parent = "system4"
+  name = "Web Dispatch"
+  url = "/system4/web_control/"
+  weight = 44
+
+[[menu.main]]
+  name = "Old Site"
+  url = "/old/"
+  weight = 50
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true

@@ -1,0 +1,28 @@
+<footer class="site-footer blueprint-grid">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h3>Contact</h3>
+        <p>Got questions? Send us an email:<br/>
+        <a href="mailto:{{ .Site.Params.email }}">{{ .Site.Params.email }}</a></p>
+      </div>
+      <div>
+        <h3>Visit</h3>
+        <p>Room N52-118<br>Cambridge, MA</p>
+      </div>
+      <div>
+        <h3>Resources</h3>
+        <ul>
+          {{ range .Site.Params.footerLinks }}
+          <li><a href="{{ .link }}">{{ .name }}</a></li>
+          {{ end }}
+        </ul>
+      </div>
+      
+    </div>
+    <div class="footer-bottom">
+      <span><span class="block-light"></span>&copy; 1997-{{ now.Year }} {{ .Site.Title }}. All rights reserved.</span>
+      <span>Est. 1946</span>
+    </div>
+  </div>
+</footer>

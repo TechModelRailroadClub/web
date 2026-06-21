@@ -1,0 +1,29 @@
+{{ define "main" }}
+<div class="page-hero blueprint-grid">
+  <div class="container">
+    <span class="eyebrow">{{ .Site.Params.shortTitle }}</span>
+    <h1>The Dispatcher's Log</h1>
+    <p class="meta">{{ len .Pages }} entries, going back to {{ (index .Pages.Reverse 0).Date.Year }}</p>
+  </div>
+</div>
+<div class="content-section">
+  <div class="container">
+    {{ range .Pages.GroupByDate "2006" }}
+    <div class="year-group">
+      <h2 class="year-group__heading">{{ .Key }}</h2>
+      <ul class="log-list">
+        {{ range .Pages }}
+        <li class="log-entry">
+          <div class="log-entry__date">{{ .Date.Format "2 Jan 2006" }}</div>
+          <div>
+            <h3 class="log-entry__title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+            <p class="log-entry__excerpt">{{ .Summary | plainify | truncate 160 }}</p>
+          </div>
+        </li>
+        {{ end }}
+      </ul>
+    </div>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

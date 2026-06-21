@@ -1,16 +1,12 @@
-FROM ubuntu:24.04
+FROM hugomods/hugo:exts AS build
 
-RUN apt-get update && apt-get install -y jekyll
-
-WORKDIR /jekyll/
+WORKDIR /site/
 
 COPY . .
-RUN sed -i 's/"\/tmrc-web"//g' _config.yml
-
-RUN jekyll build
+RUN hugo --gc --minify
 
 FROM nginx
-COPY --from=0 /jekyll/_site/ /usr/share/nginx/html/
+COPY --from=build /site/public/ /usr/share/nginx/html/
 RUN echo "#!/bin/sh" >> /entrypoint.sh
 RUN echo "nginx -g 'daemon off; &'" >> /entrypoint.sh
 RUN echo "/usr/bin/certbot -v --non-interactive --agree-tos -m tmrc-web@mit.edu --nginx -d tmrc.mit.edu" >> /entrypoint.sh
@@ -22,18 +18,9 @@ RUN /opt/certbot/bin/pip install --upgrade pip
 RUN /opt/certbot/bin/pip install certbot certbot-nginx
 RUN ln -s /opt/certbot/bin/certbot /usr/bin/certbot
 COPY nginx.conf /etc/nginx/conf.d/default.conf
-# RUN printf "server {\n    listen 80;\n    server_name tmrc.mit.edu;\n 	  access_log logs/ tmrc.mit.edu.access.log main;\n    root /usr/share/nginx/html/ tmrc.mit.edu/;\n}" >> /etc/nginx/nginx.conf
-# RUN nginx -T
 
 EXPOSE 80 443
 
 STOPSIGNAL SIGQUIT
 
 CMD ["/entrypoint.sh"]
-
-
-
-
-
-
-

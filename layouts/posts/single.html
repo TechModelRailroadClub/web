@@ -1,0 +1,17 @@
+{{ define "main" }}
+<div class="page-hero blueprint-grid">
+  <div class="container">
+    <span class="eyebrow">{{ .Site.Params.shortTitle }} News</span>
+    <h1>{{ .Title }}</h1>
+    <p class="meta">{{ .Date.Format "2 January 2006" }}{{ with .Params.author }} &middot; {{ . }}{{ end }}</p>
+  </div>
+</div>
+<div class="content-section">
+  <div class="container">
+    <div class="prose">
+      {{ .Content }}
+      <p><a href="/posts/">&larr; Back to the log</a></p>
+    </div>
+  </div>
+</div>
+{{ end }}

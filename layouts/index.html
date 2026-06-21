@@ -1,0 +1,76 @@
+{{ define "main" }}
+{{ $gallery := .Site.Params.gallery }}
+<section class="hero">
+  {{ with index $gallery 0 }}
+  <img class="hero__photo" src="{{ .image }}" alt="">
+  {{ end }}
+  <div class="hero__scrim"></div>
+  <div class="hero__content">
+    <span class="eyebrow">MIT &middot; Est. 1946</span>
+    <h1>Tech Model Railroad Club</h1>
+    <p class="hero__lede">One of the oldest student activities at MIT, running trains through Gifford City along the Tech Nickel Plate since the days of Building 20 &mdash; and the birthplace of the term &ldquo;hack.&rdquo;</p>
+    <div class="hero__ctas">
+      <a class="btn btn-primary" href="/about/">About the Club</a>
+      <a class="btn btn-ghost" href="/posts/">Read the Log</a>
+    </div>
+  </div>
+</section>
+
+<!-- <div class="tie-divider" role="presentation"></div> -->
+
+<section class="gallery-section">
+  <div class="container">
+    <span class="eyebrow">The Layout</span>
+    <h2>Gifford City &amp; the Tech Nickel Plate</h2>
+    <div class="gallery-grid">
+      {{ range $gallery }}
+      <a href="/about/">
+        <img src="{{ .image }}" alt="{{ .alt }}" loading="lazy">
+        <figcaption>{{ .alt }}</figcaption>
+      </a>
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+<div class="tie-divider" role="presentation"></div>
+
+<section class="archive-section">
+  <div class="container">
+    <div class="panel archive-card">
+      <span class="panel-rivet tl"></span>
+      <span class="panel-rivet tr"></span>
+      <span class="panel-rivet bl"></span>
+      <span class="panel-rivet br"></span>
+      <span class="eyebrow">From the Archive &middot; 26 August 1997</span>
+      <blockquote class="archive-quote">On Tuesday night, August 26, 1997, four months to the day from the decommissioning of the old layout, a short Aaron Burr consist using the same locomotive (#2415) and two of the Burr cars traversed the new expanded P-yard.</blockquote>
+      <a class="archive-link" href="/posts/1997-08-31-monthly-update/">Read the full report from that summer &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<div class="tie-divider" role="presentation"></div>
+
+<section class="log-section">
+  <div class="container">
+    <div class="log-section__head">
+      <div>
+        <span class="eyebrow">From the Dispatcher's Log</span>
+        <h2>Latest News</h2>
+      </div>
+      <a class="btn" href="/posts/">View Full Archive</a>
+    </div>
+    <ul class="log-list">
+      {{ range first 3 (where .Site.RegularPages "Section" "posts") }}
+      <li class="log-entry">
+        <div class="log-entry__date">{{ .Date.Format "2 Jan 2006" }}</div>
+        <div>
+          <h3 class="log-entry__title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+          <p class="log-entry__excerpt">{{ .Summary | plainify | truncate 160 }}</p>
+        </div>
+      </li>
+      {{ end }}
+    </ul>
+  </div>
+</section>
+{{ end }}

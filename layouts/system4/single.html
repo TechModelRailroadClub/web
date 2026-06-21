@@ -1,0 +1,18 @@
+{{ define "main" }}
+<div class="page-hero blueprint-grid">
+  <div class="container">
+    <span class="eyebrow">System 4</span>
+    <h1>{{ .Title }}</h1>
+  </div>
+</div>
+<div class="content-section">
+  <div class="container">
+    <div class="doc-layout">
+      {{ partial "system4-nav.html" . }}
+      <div class="prose">
+        {{ .Content }}
+      </div>
+    </div>
+  </div>
+</div>
+{{ end }}

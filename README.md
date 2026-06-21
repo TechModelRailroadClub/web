@@ -1,2 +1,17 @@
 # tmrc-web
-A new Jekyll-based sigte for the MIT Tech Model Railroad Club
+
+The Hugo-based site for the MIT Tech Model Railroad Club.
+
+## Local development
+
+```
+hugo server
+```
+
+## Production build
+
+```
+hugo --gc --minify
+```
+
+Output is written to `public/`.

@@ -1,0 +1,29 @@
+<header class="site-header">
+  <input type="checkbox" id="nav-toggle" class="nav-toggle">
+  <div class="site-header__bar">
+    <a class="brand" href="/">
+      <img src="/assets/img/tmrc.svg" alt="">
+      <span class="brand__name">TMRC</span>
+    </a>
+    <label for="nav-toggle" class="nav-toggle-label" aria-label="Toggle navigation menu">
+      <span class="hamburger"></span>
+    </label>
+    <ul class="nav-links">
+      {{ $rel := .RelPermalink }}
+      {{ range .Site.Menus.main }}
+      {{ $active := strings.HasPrefix $rel .URL }}
+      <li class="{{ if .HasChildren }}has-sub {{ end }}{{ if $active }}is-current{{ end }}"{{ if .HasChildren }} tabindex="0"{{ end }}>
+        <a href="{{ .URL }}"{{ if $active }} aria-current="page"{{ end }}>{{ .Name }}{{ if .HasChildren }} <span class="caret" aria-hidden="true">&#9662;</span>{{ end }}</a>
+        {{ if .HasChildren }}
+        <ul class="sub-menu">
+          {{ range .Children }}
+          {{ $childActive := eq $rel .URL }}
+          <li><a href="{{ .URL }}"{{ if $childActive }} class="is-current" aria-current="page"{{ end }}>{{ .Name }}</a></li>
+          {{ end }}
+        </ul>
+        {{ end }}
+      </li>
+      {{ end }}
+    </ul>
+  </div>
+</header>
